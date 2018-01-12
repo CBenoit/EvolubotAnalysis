@@ -5,39 +5,12 @@ Techniques:
     \item Vanilla NEAT
     \item Cascade-NEAT
     \item Novelty Search and vanilla NEAT
-    \item "Unified" networks with vanilla NEAT
+    \item `Unified' networks with vanilla NEAT
 \end{itemize}
 
-Matchups for experiments:
-\begin{itemize}
-    \item 22 marines vs 22 marines (with stimpacks)
-    \item 22 marines vs 44 zergs (with stimpacks)
-    \item 22 vultures vs 22 vultures
-    \item 22 vultures vs 22 zealots
-\end{itemize}
+A fresh C++ implementation of these methods was developed and is hosted on Github under the name of NEToolKit\footnote{\url{https://github.com/CBenoit/NEToolKit}}.
 
-For each matchup and for each technique, we run three times an evolution from scratch up to the 100th generation.
-Then, 50 games using the five best genomes produced during the evolution.
+The Starcraft bot can be found on Github as well under the name of Evolubot\footnote{\url{https://github.com/CBenoit/Evolubot}}.
 
-During the evolution the following data are logged:
-\begin{itemize}
-    \item number of survivors
-    \item average fitness of each generation
-    \item best fitness of each generation
-    \item best current fitness ever for each generation
-\end{itemize}
-
-For the best units games, we only need to log the number of survivors.
-
-To encourage cooperation and survival rate, we integrate the number of survivors in the fitness function.
-
-Marines with stimpack may be a deceptive problem since it's basicaly losing health to gain performance.
-We hope the agents learns to do so in order to win and increase survivors.
-
-Especially, the marines vs zerg problem may be good to learn how to use stimpacks since it’s very difficult
-for marines to win without using them. So, more stimpack usage is expected for this problem.
-
-Novelty currently just use fitness as novelty metrics. Not best use case at all for this method.
-
-TODO: add all parameters for experiments.
+The analysis of the data was performed with the R language. Source can, again, be found on Github\footnote{\url{https://github.com/CBenoit/EvolubotAnalysis}}.
 
