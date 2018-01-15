@@ -1,8 +1,14 @@
-\documentclass[sigconf]{acmart}
+\documentclass[sigconf, authordraft]{acmart}
 
 \input{./tex/preamble.tex}
 
 \setcopyright{rightsretained}
+
+% DOI
+\acmDOI{10.1145/nnnnnnn.nnnnnnn}
+
+% ISBN
+\acmISBN{978-x-xxxx-xxxx-x/YY/MM}
 
 % Conference
 \acmConference[GECCO '18]{the Genetic and Evolutionary Computation
@@ -10,22 +16,49 @@ Conference 2018}{July 15--19, 2018}{Kyoto, Japan}
 \acmYear{2018}
 \copyrightyear{2018}
 
-\title{Humane approach to Starcraft micromanagement: not only victory, evaluate losses as well}
+\acmPrice{15.00}
 
-\author{Benoit Cortier}
-\email{benoit.cortier@fried-world.eu}
-
-\date{\today}
-
-\keywords{Starcraft, micromanagement, NEAT, comparison, neuroevolution, artificial neural networks, evolutionary algorithms, RTS}
+\acmSubmissionID{123-A12-B3}
 
 \begin{document}
 
-\maketitle
+\title{Humane approach to Starcraft micromanagement: not only victory, evaluate losses as well}
+
+\author{Author 1}
+\affiliation{
+  \institution{University of Author 1}
+  \streetaddress{Address of University 1}
+  \city{City 1}
+  \country{Country 1}
+  }
+\email{Author 1}
 
 \begin{abstract}
-    Abstract todo here.
+  {\bf TODO} In this paper we investigate the training of an
+  artificial neural network that controls a squad of units in the
+  StarCraft:Brood Wars game so that the squad not only achieves the
+  highest proportion of victories, but does so with the smallest
+  number of casualties. {\bf TODO}
 \end{abstract}
+
+\begin{CCSXML}
+<ccs2012>
+<concept>
+<concept_id>10010405.10010476.10011187.10011190</concept_id>
+<concept_desc>Applied computing~Computer games</concept_desc>
+<concept_significance>500</concept_significance>
+</concept>
+</ccs2012>
+\end{CCSXML}
+
+\ccsdesc[500]{Applied computing~Computer games}
+
+\keywords{Starcraft, micromanagement, NEAT, neuroevolution, artificial
+  neural networks, evolutionary algorithms, RTS}
+
+
+\maketitle
+
 
 \input{./tex/introduction}
 
@@ -43,7 +76,9 @@ Conference 2018}{July 15--19, 2018}{Kyoto, Japan}
 
 \section*{Acknowledgements}
 
-I would like to thanks Claus Aranha… TODO
+I would like to thank ACKNOWLEDGEMENT 1 for their assistance in the
+preparation of this manuscript. AUTHOR 1 was partially funded by
+ACKNOWLEDGMENT 2.
 
 \bibliographystyle{ACM-Reference-Format}
 \bibliography{bibliography}{}
