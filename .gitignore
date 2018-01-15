@@ -2,4 +2,13 @@
 .Rhistory
 .RData
 .Ruserdata
+
 *.swp
+
+.autolatex_stamp
+*.aux
+*.bbl
+*.blg
+*.log
+*.out
+main.pdf
