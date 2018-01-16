@@ -1,19 +1,47 @@
-\section{Literature review}\label{section:literature-review}
+\section{Background}\label{section:literature-review}
+
+\subsection{Starcraft}
+
+{\bf about Starcraft:} Talk about starcraft the game, add a recent
+survey on starcraft research
+
+{\bf about BWAPI:} Talk about the technical side, API, bot code, etc.
+
+\subsection{Micromanagement}
+
+Talk about the micromanagement problem, give some examples, show a
+match picture
+
+{\bf recent works about micromanagement in starcraft:} Add some recent
+works about micro in starcraft, and comment how they all measure
+success strictly as the winning rate of encounters, and how in this
+work we want to extend this area by taking the number of unit lost
+into account.
 
 \subsection{NEAT}
 
-NEAT is a \emph{NeuroEvolution} method. The principle is to \emph{start with a minimal topology and grow it} to match the problem difficulty in order to find an appropriate network.
-It does that by adding and removing neurons, changing weights, adding connections, …
-Any neuron can be connected to any neuron including itself, meaning even \emph{recurrent neural networks} can be generated.
-At each generation high fitness networks get better chance of reproduction. But even so, \emph{NEAT maintains genetic diversity}
-through a process called \emph{speciation}. That is, similar networks are considered to be in the same species. Then, to encourage innovation, \emph{explicit fitness sharing}
-is performed on members of the same species. Each species is assigned a number of offsprings it can produce. Then species' members compete against each others. \cite{StMi02}
+NEAT is a \emph{NeuroEvolution} method. The principle is to
+\emph{start with a minimal topology and grow it} to match the problem
+difficulty in order to find an appropriate network.  It does that by
+adding and removing neurons, changing weights, adding connections, ...
+Any neuron can be connected to any neuron including itself, meaning
+even \emph{recurrent neural networks} can be generated.  At each
+generation high fitness networks get better chance of
+reproduction. But even so, \emph{NEAT maintains genetic diversity}
+through a process called \emph{speciation}. That is, similar networks
+are considered to be in the same species. Then, to encourage
+innovation, \emph{explicit fitness sharing} is performed on members of
+the same species. Each species is assigned a number of offsprings it
+can produce. Then species' members compete against each
+others. \cite{StMi02}
 
-Various variant of the method has been created to answer specific problems such as \emph{Cascade-NEAT}.
+Various variant of the method has been created to answer specific
+problems such as \emph{Cascade-NEAT}.
 
 \subsection{Cascade-NEAT}
 
-Restrict the search process to topologies that have a cascade architecture, good for fractured problems.
+Restrict the search process to topologies that have a cascade
+architecture, good for fractured problems.
 
 Article: learning in fractured problems with constructive neural networks algorithms.
 
@@ -25,19 +53,28 @@ Article: evolving neural networks for strategic decision-making problems.
 
 \subsection{Potential fields}
 
-Micromanagement potential fields multi-objectives genetic algorithm. Micromanagement using Potential Fields tuned with a Multi-Objective Optimized Evolutionary Algorithm (namely NSGA-II). Present a model to handle priority targets, focus firing, retreat spots, … Talk about how to get a behaviour optimizing multiple objectives. Use of the killscore.
+Micromanagement potential fields multi-objectives genetic
+algorithm. Micromanagement using Potential Fields tuned with a
+Multi-Objective Optimized Evolutionary Algorithm (namely
+NSGA-II). Present a model to handle priority targets, focus firing,
+retreat spots, … Talk about how to get a behaviour optimizing multiple
+objectives. Use of the killscore.
 
 \citet{SiSuBa14}
 
 \subsection{Others}
 
-Applying reinforcement learning to small scale combat in the strategy game starcraft broodwar. Uses Q-learning and Sarsa.
+Applying reinforcement learning to small scale combat in the strategy
+game starcraft broodwar. Uses Q-learning and Sarsa.
 
-Connectionist reinforcement learning for intelligent unit micro management in starcraft.
-Uses neural networks to evaluate Q-values for Sarsa reinforcement learning method. Results on incremental learning.
-Interesting part for reward units: dead units don’t get a negative reward for dying.
-Instead the reward of the dead unit is the average reward of all living units in the next state.
-It introduce a sort of cooperative behaviour. See neural-fitted Q-iteration.
+Connectionist reinforcement learning for intelligent unit micro
+management in starcraft.  Uses neural networks to evaluate Q-values
+for Sarsa reinforcement learning method. Results on incremental
+learning.  Interesting part for reward units: dead units don’t get a
+negative reward for dying.  Instead the reward of the dead unit is the
+average reward of all living units in the next state.  It introduce a
+sort of cooperative behaviour. See neural-fitted Q-iteration.
 
-NeuroEvolution for micromanagement in rts game starcraft bw. About battle micromanagement and NEAT vs rtNEAT.
+NeuroEvolution for micromanagement in rts game starcraft bw. About
+battle micromanagement and NEAT vs rtNEAT.
 
