@@ -25,8 +25,6 @@ and in a full game, these survivors can be reallocated to the next battle and ca
 However, this information is not showed as much as we would like to. \citet{SiSuBa14} though also included some measurement of loss
 and survivors in their evaluation.
 
-To encourage cooperation and survival rate, we integrate the number of survivors in the fitness function.
-
 Marines with stimpack may be a deceptive problem since it's basicaly losing health to gain performance.
 We hope the agents learns to do so in order to win and increase survivors.
 
@@ -35,5 +33,142 @@ for marines to win without using them. So, more stimpack usage is expected for t
 
 Novelty currently just use fitness as novelty metrics. Not best use case at all for this method.
 
-TODO: add all parameters for experiments.
+Of course, as for all genetic algorithms, a lot of parameters has to be set up.
+
+First, for the NEAT library in itself, it has being set up the following.
+
+These are the overidden parameters especially for the experiments:
+
+\begin{tabular}{rll}
+    \toprule
+    Parameter & Value & Tweaks \\
+    \midrule
+    Number of inputs & 5 & 6 for marines \\
+    Number of outputs & 4 & 5 for marines \\
+    Initial population size & 22  & — \\[1ex]
+
+    Compatibility threshold & 2 & — \\
+    Dynamic compatibility threshold & true & — \\
+    Target number of species & 4 & — \\
+    Keep same species' representant & true & — \\[1ex]
+
+    Use best genomes library & true & false if novelty search \\
+    Bad genome max fitness & 100 & 1000 if unified mode \\
+    \bottomrule
+\end{tabular}
+
+The initial population size match the number of controlled units in the used scenarios.
+
+The number of inputs and outputs is greater for marines because of the stimpack behaviour.
+Marine neural networks can sense wether or not the stimpack is active on the unit in addition to all other inputs.
+The new output had to be added to be used for stimppack activation.
+
+The keep same species' representant parameter is used to avoid the update of the representant of species with a
+random member at each generation as described in the original NEAT paper and instead keep the first representant of
+the species.
+
+The best genomes library is not used for novelty search because, the fitness is not used as a performance metrics in
+that situation. Instead, a separate list of the best genomes is managed.
+
+The bad genome max fitness determine which genomes are to be considered bad given the fitness. These genomes
+may occasionally be replaced by one from the best genome library.
+
+Other parameters are kept to defaults which, at least for the moment where the experiments where performed, were:
+
+\begin{tabular}{rl}
+    \toprule
+    Parameter & Default value \\
+    \midrule
+    Mutation add link probability & 0.06 \\
+    Mutation add neuron probabily & 0.03 \\
+    Mutation remove neuron & 0.03 \\
+    Mutation add cascade & 0.00 \\
+    Mutation remove gene & 0.03 \\
+    Mutation reenable gene & 0.03 \\
+    Mutation toggle enable & 0.03 \\
+    Mutation reset weights & 0.03 \\
+    Mutation perturbate weights & 0.30 \\[1ex]
+
+    Distance coefficient 1 & 1.0 \\
+    Distance coefficient 2 & 1.5 \\
+    Distance coefficient 3 & 0.4 \\
+    Compatibility threshold change step & 0.05 \\[1ex]
+
+    No reproduction threshold & 30 \\
+    Mutation during crossover probability & 0.25 \\
+    Initial weight perturbation & 10.0 \\
+    Weight mutation power & 3.0 \\[1ex]
+
+    Crossover probability & 0.20 \\
+    Interspecies crossover probability & 0.05 \\
+    Crossover ``multipoint random'''s weight & 2 \\
+    Crossover ``multipoint best'''s weight & 0 \\
+    Crossover ``multipoint average'''s weight & 0 \\[1ex]
+
+    Replace bad genes using best genomes library prob & 0.05 \\
+    Best genomes library max size & 5 \\
+    \bottomrule
+\end{tabular}
+
+The distance coefficients are used in the compatibility distance formula which is
+\[dist = c1 × \frac{E}{N} + c2 × \frac{D}{N} + c3 × W\]
+with N the number of genes of the larger genome, E the number of excess genes, D the number of disjoint genes and
+W the average weight differences of matching genes.
+The is the original compatibility distance formula.~\cite{StMi02}
+
+The ``no reproduction threshold'' parameter is used to prevent a species from reproduction if the
+said species didn't improved for the given number of generations.
+
+The only exception is for the cascade-NEAT variant where some mutation probabilities are changed:
+
+\begin{tabular}{rl}
+    \toprule
+    Parameter & Default value \\
+    \midrule
+    Add link & 0.00 \\
+    Add neuron & 0.00 \\
+    Remove neuron & 0.00 \\
+    Add cascade & 0.03 \\
+    Remove gene & 0.00 \\
+    \bottomrule
+\end{tabular}
+
+Indeed, the add cascade operation should be the only used in that case.
+
+These parameters where mostly taken from the existing literature and were obtained through experimentation.
+
+Next are the parameters of the Starcraft bot itself.
+
+\begin{tabular}{rl}
+    \toprule
+    Parameter & Default value \\
+    \midrule
+    FRAMES PER UPDATE & 10 \\
+    MAX DISTANCE NN & 1500 \\
+    MAX ENTITY NN  & 20 \\[1ex]
+
+    SURVIVAL PERF WEIGHT & 0.5 \\
+    ATTACK PERF WEIGHT & 0.5 \\
+    COOPERATIVE PERF WEIGHT & 10 \\
+    UNIFIED ATTACK PERF WEIGHT & 0.33 \\
+    UNIFIED COOPERATIVE PERF WEIGHT & 100 \\
+    EXPONENT ON FITNESS & 1.3 \\
+    \bottomrule
+\end{tabular}
+
+``MAX DISTANCE NN'' and ``MAX ENTITY NN'' are, respectively, the maximal distance and the maximal number of entities a neural network can perceive.
+This is used for normalization purpose. All values greater than these will result in the value \(1\) being fed as the input so that
+all inputs are in range \([0, 1]\).
+
+The weights are used to model the fitness function. There is two fitness function according to whether unified mode is active or not.
+If not, the function is given by:
+\[(damages\_dealt × A + health × B + survivors × C)^D\]
+where A is the attack performance weight, B the survival performance weight, C the
+cooperative performance weight and D the exponent on fitness.
+If, however, it is in unified mode, the following function is instead used:
+\[(damages\_dealt × A + survivors × C)^D\]
+where A is the unified attack performance weight, C the unified cooperative performance weight
+and D the same as previously exponent on fitness.
+
+The number of survivors is integrated in the fitness function so as to encourage cooperation and survival rate.
 
