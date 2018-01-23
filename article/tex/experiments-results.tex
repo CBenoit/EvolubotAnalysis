@@ -1,29 +1,45 @@
 \section{Experiments and results}\label{section:experiments-results}
 
-\subsection{Developping stimpack behaviour}
+\subsection{Qualitative results (behaviours)}
 
-Vanilla NEAT doesn’t seems to be good a developing the stimpack behaviour since organisms that survives without stimpack get better reward,
-even though they may have survived because others used stimpacks to get in the frontline and got themselves killed first.
+\subsubsection{Developping stimpack behaviour}
+
+Vanilla NEAT doesn’t seems to be good a developing the stimpack behaviour since organisms
+that survives without stimpack get better reward,
+even though they may have survived because others used stimpacks to get in the frontline
+and got themselves killed first.
 So, organisms tends to lose this behaviour over generations.
 
 CHECK: Cascade-NEAT and Novelty [expected to be approximately identical].
 
-In comparison, the unified version, which is good a developing uniform behaviours was somewhat better at developing this behaviour.
-Indeed, since every agents use the same type of neural network, all units in the round has the behaviour encoded and don’t win because others
+In comparison, the unified version, which is good a developing uniform behaviours
+was somewhat better at developing this behaviour.
+Indeed, since every agents use the same type of neural network, all units in the round
+has the behaviour encoded and don’t win because others
 did all the hard stuff.
 
-Sadly the marines vs marines problem can be solved efficiently just by waiting for the enemy and attacking all out mostly without stimpacks.
-Depending on the enemy’s formation at it’s arrival it can be even more effective. They can indeed shoot first with more firepower.
+Sadly the marines vs marines problem can be solved efficiently just by waiting for the
+enemy and attacking all out mostly without stimpacks.
+Depending on the enemy’s formation at it’s arrival it can be even more effective.
+They can indeed shoot first with more firepower.
 
-Novelty search got a significantly better result on the marines vs zergs experiments, meaning it was able to develop some stimpack behaviours. [need more behaviour analysis]
+Novelty search got a significantly better result on the marines vs zergs experiments,
+meaning it was able to develop some stimpack behaviours. [need more behaviour analysis]
 
 Conclusion: not a big success. Overall failure.
 
-\subsection{Resulting behaviours}
+\subsubsection{Kiting behaviour}
 
 …
 
-\subsection{Survivors and victory comparison}
+
+\subsubsection{Others}
+
+…
+
+\subsection{Quantitative results (statistical)}
+
+\subsubsection{Survivors and victory comparison}
 
 …
 

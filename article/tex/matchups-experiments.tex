@@ -7,7 +7,8 @@
     \item 22 vultures vs 22 zealots
 \end{itemize}
 
-For each matchup and for each technique, we run three times an evolution from scratch up to the 100th generation.
+For each matchup and for each technique, we run three times an evolution
+from scratch up to the 100th generation.
 Then, 50 games using the five best genomes produced during the evolution.
 
 During the evolution the following data are logged:
@@ -20,18 +21,25 @@ During the evolution the following data are logged:
 
 For the best units games, we only need to log the number of survivors.
 
-We consider the number of survivors to be a relevent criteria. Indeed, a high number of survivors means the skirmish went well
-and in a full game, these survivors can be reallocated to the next battle and can thus influence the long term outcome.
-However, this information is not showed as much as we would like to. \citet{SiSuBa14} though also included some measurement of loss
+We consider the number of survivors to be a relevent criteria.
+Indeed, a high number of survivors means the skirmish went well
+and in a full game, these survivors can be reallocated to the
+next battle and can thus influence the long term outcome.
+However, this information is not showed as much as we would like to. \citet{SiSuBa14}
+though also included some measurement of loss
 and survivors in their evaluation.
 
-Marines with stimpack may be a deceptive problem since it's basicaly losing health to gain performance.
+Marines with stimpack may be a deceptive problem since
+it's basicaly losing health to gain performance.
 We hope the agents learns to do so in order to win and increase survivors.
 
-Especially, the marines vs zerg problem may be good to learn how to use stimpacks since it’s very difficult
-for marines to win without using them. So, more stimpack usage is expected for this problem.
+Especially, the marines vs zerg problem may be good to
+learn how to use stimpacks since it’s very difficult
+for marines to win without using them. So, more stimpack usage
+is expected for this problem.
 
-Novelty currently just use fitness as novelty metrics. Not best use case at all for this method.
+Novelty currently just use fitness as novelty metrics. Not best use case at
+all for this method.
 
 Of course, as for all genetic algorithms, a lot of parameters has to be set up.
 
@@ -59,21 +67,27 @@ These are the overidden parameters especially for the experiments:
 
 The initial population size match the number of controlled units in the used scenarios.
 
-The number of inputs and outputs is greater for marines because of the stimpack behaviour.
-Marine neural networks can sense wether or not the stimpack is active on the unit in addition to all other inputs.
+The number of inputs and outputs is greater for marines because
+of the stimpack behaviour.
+Marine neural networks can sense wether or not the stimpack is active
+on the unit in addition to all other inputs.
 The new output had to be added to be used for stimppack activation.
 
-The keep same species' representant parameter is used to avoid the update of the representant of species with a
-random member at each generation as described in the original NEAT paper and instead keep the first representant of
-the species.
+The keep same species' representant parameter is used to avoid the update
+of the representant of species with a
+random member at each generation as described in the original NEAT paper
+and instead keep the first representant of the species.
 
-The best genomes library is not used for novelty search because, the fitness is not used as a performance metrics in
+The best genomes library is not used for novelty search because, the fitness
+is not used as a performance metrics in
 that situation. Instead, a separate list of the best genomes is managed.
 
-The bad genome max fitness determine which genomes are to be considered bad given the fitness. These genomes
-may occasionally be replaced by one from the best genome library.
+The bad genome max fitness determine which genomes are to be considered bad given
+the fitness. These genomes may occasionally be replaced by one from the best genome
+library.
 
-Other parameters are kept to defaults which, at least for the moment where the experiments where performed, were:
+Other parameters are kept to defaults which, at least for the moment where the
+experiments where performed, were:
 
 \begin{tabular}{rl}
     \toprule
@@ -112,14 +126,15 @@ Other parameters are kept to defaults which, at least for the moment where the e
 
 The distance coefficients are used in the compatibility distance formula which is
 \[dist = c1 × \frac{E}{N} + c2 × \frac{D}{N} + c3 × W\]
-with N the number of genes of the larger genome, E the number of excess genes, D the number of disjoint genes and
-W the average weight differences of matching genes.
+with N the number of genes of the larger genome, E the number of excess genes,
+D the number of disjoint genes and W the average weight differences of matching genes.
 The is the original compatibility distance formula.~\cite{StMi02}
 
-The ``no reproduction threshold'' parameter is used to prevent a species from reproduction if the
-said species didn't improved for the given number of generations.
+The ``no reproduction threshold'' parameter is used to prevent a species from
+reproduction if the said species didn't improved for the given number of generations.
 
-The only exception is for the cascade-NEAT variant where some mutation probabilities are changed:
+The only exception is for the cascade-NEAT variant where some mutation probabilities
+are changed:
 
 \begin{tabular}{rl}
     \toprule
@@ -135,7 +150,8 @@ The only exception is for the cascade-NEAT variant where some mutation probabili
 
 Indeed, the add cascade operation should be the only used in that case.
 
-These parameters where mostly taken from the existing literature and were obtained through experimentation.
+These parameters where mostly taken from the existing literature and were obtained
+through experimentation.
 
 Next are the parameters of the Starcraft bot itself.
 
@@ -156,19 +172,23 @@ Next are the parameters of the Starcraft bot itself.
     \bottomrule
 \end{tabular}
 
-``MAX DISTANCE NN'' and ``MAX ENTITY NN'' are, respectively, the maximal distance and the maximal number of entities a neural network can perceive.
-This is used for normalization purpose. All values greater than these will result in the value \(1\) being fed as the input so that
+``MAX DISTANCE NN'' and ``MAX ENTITY NN'' are, respectively, the maximal distance and
+the maximal number of entities a neural network can perceive.
+This is used for normalization purpose. All values greater than these will result in the
+value \(1\) being fed as the input so that
 all inputs are in range \([0, 1]\).
 
-The weights are used to model the fitness function. There is two fitness function according to whether unified mode is active or not.
+The weights are used to model the fitness function. There is two fitness function
+according to whether unified mode is active or not.
 If not, the function is given by:
 \[(damages\_dealt × A + health × B + survivors × C)^D\]
 where A is the attack performance weight, B the survival performance weight, C the
 cooperative performance weight and D the exponent on fitness.
 If, however, it is in unified mode, the following function is instead used:
 \[(damages\_dealt × A + survivors × C)^D\]
-where A is the unified attack performance weight, C the unified cooperative performance weight
-and D the same as previously exponent on fitness.
+where A is the unified attack performance weight, C the unified cooperative performance
+weight and D the same as previously exponent on fitness.
 
-The number of survivors is integrated in the fitness function so as to encourage cooperation and survival rate.
+The number of survivors is integrated in the fitness function so as to encourage
+cooperation and survival rate.
 
