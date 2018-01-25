@@ -1,4 +1,4 @@
-\documentclass[sigconf, authordraft]{acmart}
+\documentclass[sigconf, authordraft, anonymous]{acmart}
 
 \input{./tex/preamble.tex}
 
@@ -32,20 +32,31 @@ Conference 2018}{July 15--19, 2018}{Kyoto, Japan}
              }
 \email{Author 1}
 
-\author{Author 2}
-\affiliation{\institution{University of Author 2}
-             \streetaddress{Address of University 2}
-             \city{City 2}
-             \country{Country 2}
+\author{Claus Aranha}
+\affiliation{\institution{University of Tsukuba, Faculty of Engineering, Information and Systems}
+             \streetaddress{Tennodai 1-1-1}
+             \city{Tsukuba City}
+             \country{Japan}
              }
-\email{Author 2}
+\email{caranha@cs.tsukuba.ac.jp}
 
+% 154 words (Maximum 200 words)
 \begin{abstract}
-  {\bf TODO} In this paper we investigate the training of an
-  artificial neural network that controls a squad of units in the
-  StarCraft:Brood Wars game so that the squad not only achieves the
-  highest proportion of victories, but does so with the smallest
-  number of casualties. {\bf TODO}
+  We study the use of NEAT and variants to develop strategies for the
+  micromanagement of squads of units in the \emph{Starcraft: Brood
+    Wars} game. While current research in this field focuses on
+  developing strategies that maximize win rate, we are interested in
+  also minimizing the amount of losses in terms of destroyed
+  units. This is important when one considers that starcraft battles
+  are in the context of a longer strategic play session, and in this
+  sense conserving resources is important. To achieve this goal, we
+  experimented with four NEAT variants: vanilla NEAT, novelty-search
+  NEAT, unified (or homogeneous) NEAT and cascade NEAT. We explored
+  these four variants with four different sets of units. Quantitative
+  speaking, it was not possible to observe a difference in the learned
+  behavior among the different methods. We perform a qualitative
+  analysis of the different combat scenarios and draw ideas for future
+  work that could achieve our original goal.
 \end{abstract}
 
 \begin{CCSXML}
