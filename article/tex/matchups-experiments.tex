@@ -1,51 +1,62 @@
-\section{Matchups and experiments}
+\section{Experiment Design}
 
-\begin{itemize}
-    \item 22 marines vs 22 marines (with stimpacks)
-    \item 22 marines vs 44 zergs (with stimpacks)
+We designed the following experiment to compare the four NEAT
+implementations described in the previous session in regards to their
+victory ratio and survival ratio.
+
+\subsection{Match Specification}
+
+The experiment focuses on a matchup between a squad of units
+controlled by the NEAT implementation, and a squad of units controlled
+by the standard starcraft controller. Four unit matchups were defined:
+\begin{enumerate}
+    \item 22 marines vs 22 marines 
+    \item 22 marines vs 44 zerglings 
     \item 22 vultures vs 22 vultures
     \item 22 vultures vs 22 zealots
-\end{itemize}
+\end{enumerate}
+%% BENOIT, PLEASE CONFIRM THE INFORMATION BELOW
+In these matchups, the marines have stimpacks, but no other upgrades
+are added to the units. The match occurs in a custom map without any
+obstacles, and the units of both sides start at opposite ends of the
+map.
 
-For each matchup and for each technique, we run three times an evolution
-from scratch up to the 100th generation.
-Then, 50 games using the five best genomes produced during the evolution.
+The units matchup were chosen to see if the controller could learn a
+kiting behavior that helps preserve units. Additionally, the case of
+marines (matchups 1 and 2) has the additional problem of stimpack
+usage: Using a stimpack damages the unit in exchange of a boost in
+speed. This causes a deceptive problem where the usage of stimpack
+causes a short term penalty in exchange of a possible longer term gain
+in victory and survival ratios. In particular, the marine vs zerglings
+matchup is very difficult to win without proper stimpack usage, so we
+would expect the controllers to learn it.
 
-During the evolution the following data are logged:
-\begin{itemize}
-    \item number of survivors
-    \item average fitness of each generation
-    \item best fitness of each generation
-    \item best current fitness ever for each generation
-\end{itemize}
+\subsection{Learning and Comparison specification}
 
-For the best units games, we only need to log the number of survivors.
+The comparison among techniques is composed of two stages: learning
+and evaluation.
 
-We consider the number of survivors to be a relevent criteria.
-Indeed, a high number of survivors means the skirmish went well
-and in a full game, these survivors can be reallocated to the
-next battle and can thus influence the long term outcome.
-However, this information is not showed as much as we would like to. \citet{SiSuBa14}
-though also included some measurement of loss
-and survivors in their evaluation.
+At the learning stage, we execute a complete evolution run with 100
+generations for each combination of matchup and technique 3 times (for
+a total of 48 evolution runs). The average fitness, best fitness and
+number of survivors is logged for each generation.
 
-Marines with stimpack may be a deceptive problem since
-it's basicaly losing health to gain performance.
-We hope the agents learns to do so in order to win and increase survivors.
+After the learning stage, we evaluate each method by extracting the
+five best genomes produced during the three evolution runs, and using
+them for 50 games on an identical matchup. For these games, we log
+the number of survivors and whether the game ended in victory or loss.
 
-Especially, the marines vs zerg problem may be good to
-learn how to use stimpacks since it’s very difficult
-for marines to win without using them. So, more stimpack usage
-is expected for this problem.
+\subsection{Parameter Specifications}
 
-Novelty currently just use fitness as novelty metrics. Not best use case at
-all for this method.
+Both the NEAT variants and the Starcraft Bot require multiple
+parameters to be tuned in advance of any sort of experimentation. We
+highlight some parameters that we feel are important for a better
+understanding of the experimental results. A full list of the
+parameters used can be obtained at the project github repository
+listed in section \ref{section:proposal}.
 
-Of course, as for all genetic algorithms, a lot of parameters has to be set up.
-
-First, for the NEAT library in itself, it has being set up the following.
-
-These are the overidden parameters especially for the experiments:
+% IMPORTANT QUESTION: ARE WE USING A STANDARD NEAT LIBRARY? IF NOT,
+% WHERE DO THE STANDARD NEAT PARAMETERS COME FROM?
 
 \begin{tabular}{rll}
     \toprule
@@ -56,89 +67,45 @@ These are the overidden parameters especially for the experiments:
     Initial population size & 22  & — \\[1ex]
 
     Compatibility threshold & 2 & — \\
-    Dynamic compatibility threshold & true & — \\
+    Dynamic compat. thresh. & true & — \\
     Target number of species & 4 & — \\
     Keep same species' representant & true & — \\[1ex]
 
-    Use best genomes library & true & false if novelty search \\
-    Bad genome max fitness & 100 & 1000 if unified mode \\
+    Use best genomes library & true & false if NS \\
+    Bad genome max fitness & 100 & 1000 if Unified \\
     \bottomrule
 \end{tabular}
 
-The initial population size match the number of controlled units in the used scenarios.
+The reason for overriding these parameters is as follows: The
+\emph{initial population size} matches the number of controlled units
+in the squad.  The \emph{number of inputs and outputs} for marines is
+greater because the marine unit has to decide whether to use the
+stimpack (output), and can sense whether the stimpack is ready for
+activation (input). The \emph{keep same species' representant}
+parameter is used to avoid the update of the representant of species
+with a random member at each generation as described in the original
+NEAT paper and instead keep the first representant of the species. The
+best genomes library is not used for Novelty Search because NS does
+not use the fitness as a performance metric. Instead, a separate list
+of the best genomes is managed. The \emph{bad genome max fitness}
+determine which genomes are to be considered bad given the
+fitness. These genomes may occasionally be replaced by one from the
+best genome library.
 
-The number of inputs and outputs is greater for marines because
-of the stimpack behaviour.
-Marine neural networks can sense wether or not the stimpack is active
-on the unit in addition to all other inputs.
-The new output had to be added to be used for stimppack activation.
 
-The keep same species' representant parameter is used to avoid the update
-of the representant of species with a
-random member at each generation as described in the original NEAT paper
-and instead keep the first representant of the species.
+% IF THIS IS ALL DEFAULT, THEN IT IS NOT NECESSARY.
 
-The best genomes library is not used for novelty search because, the fitness
-is not used as a performance metrics in
-that situation. Instead, a separate list of the best genomes is managed.
+%The distance coefficients are used in the compatibility distance formula which is
+%\[dist = c1 × \frac{E}{N} + c2 × \frac{D}{N} + c3 × W\]
+%with N the number of genes of the larger genome, E the number of excess genes,
+%D the number of disjoint genes and W the average weight differences of matching genes.
+%The is the original compatibility distance formula.~\cite{StMi02}
 
-The bad genome max fitness determine which genomes are to be considered bad given
-the fitness. These genomes may occasionally be replaced by one from the best genome
-library.
-
-Other parameters are kept to defaults which, at least for the moment where the
-experiments where performed, were:
-
-\begin{tabular}{rl}
-    \toprule
-    Parameter & Default value \\
-    \midrule
-    Mutation add link probability & 0.06 \\
-    Mutation add neuron probabily & 0.03 \\
-    Mutation remove neuron & 0.03 \\
-    Mutation add cascade & 0.00 \\
-    Mutation remove gene & 0.03 \\
-    Mutation reenable gene & 0.03 \\
-    Mutation toggle enable & 0.03 \\
-    Mutation reset weights & 0.03 \\
-    Mutation perturbate weights & 0.30 \\[1ex]
-
-    Distance coefficient 1 & 1.0 \\
-    Distance coefficient 2 & 1.5 \\
-    Distance coefficient 3 & 0.4 \\
-    Compatibility threshold change step & 0.05 \\[1ex]
-
-    No reproduction threshold & 30 \\
-    Mutation during crossover probability & 0.25 \\
-    Initial weight perturbation & 10.0 \\
-    Weight mutation power & 3.0 \\[1ex]
-
-    Crossover probability & 0.20 \\
-    Interspecies crossover probability & 0.05 \\
-    Crossover ``multipoint random'''s weight & 2 \\
-    Crossover ``multipoint best'''s weight & 0 \\
-    Crossover ``multipoint average'''s weight & 0 \\[1ex]
-
-    Replace bad genes using best genomes library prob & 0.05 \\
-    Best genomes library max size & 5 \\
-    \bottomrule
-\end{tabular}
-
-The distance coefficients are used in the compatibility distance formula which is
-\[dist = c1 × \frac{E}{N} + c2 × \frac{D}{N} + c3 × W\]
-with N the number of genes of the larger genome, E the number of excess genes,
-D the number of disjoint genes and W the average weight differences of matching genes.
-The is the original compatibility distance formula.~\cite{StMi02}
-
-The ``no reproduction threshold'' parameter is used to prevent a species from
-reproduction if the said species didn't improved for the given number of generations.
-
-The only exception is for the cascade-NEAT variant where some mutation probabilities
-are changed:
+Also, for the Cascade Neat variant, some mutation probabilities are modified:
 
 \begin{tabular}{rl}
     \toprule
-    Parameter & Default value \\
+    Parameter & Value \\
     \midrule
     Add link & 0.00 \\
     Add neuron & 0.00 \\
@@ -148,16 +115,16 @@ are changed:
     \bottomrule
 \end{tabular}
 
-Indeed, the add cascade operation should be the only used in that case.
+These parameters were either taken from existing literature, or
+obtained through experimentation.
 
-These parameters where mostly taken from the existing literature and were obtained
-through experimentation.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-Next are the parameters of the Starcraft bot itself.
+Finally, we discuss the parameters for the NEAT starcraft bot:
 
 \begin{tabular}{rl}
     \toprule
-    Parameter & Default value \\
+    Parameter & Value \\
     \midrule
     FRAMES PER UPDATE & 10 \\
     MAX DISTANCE NN & 1500 \\
@@ -172,23 +139,28 @@ Next are the parameters of the Starcraft bot itself.
     \bottomrule
 \end{tabular}
 
-``MAX DISTANCE NN'' and ``MAX ENTITY NN'' are, respectively, the maximal distance and
-the maximal number of entities a neural network can perceive.
-This is used for normalization purpose. All values greater than these will result in the
-value \(1\) being fed as the input so that
-all inputs are in range \([0, 1]\).
+``MAX DISTANCE NN'' and ``MAX ENTITY NN'' are, respectively, the
+maximal distance and the maximal number of entities a neural network
+can perceive.  This is used for normalization purposes. All values
+greater than these will result in the value \(1\) being fed as the
+input so that all inputs are in range \([0, 1]\).
 
-The weights are used to model the fitness function. There is two fitness function
-according to whether unified mode is active or not.
-If not, the function is given by:
-\[(damages\_dealt × A + health × B + survivors × C)^D\]
-where A is the attack performance weight, B the survival performance weight, C the
-cooperative performance weight and D the exponent on fitness.
-If, however, it is in unified mode, the following function is instead used:
-\[(damages\_dealt × A + survivors × C)^D\]
-where A is the unified attack performance weight, C the unified cooperative performance
-weight and D the same as previously exponent on fitness.
+\subsection{Fitness Specification}
 
-The number of survivors is integrated in the fitness function so as to encourage
-cooperation and survival rate.
+The weights are used to model the fitness function. There are two
+fitness functions, according to whether the Unified NEAT variant is
+being used or not.  The regular fitness function is given by
+\begin{equation*}
+  (\text{damages\_dealt} \times A + \text{health} \times B + \text{survivors} \times C)^D,
+\end{equation*}
+while the fitness for the Unified NEAT variant is
+\begin{equation*}
+  (\text{damages\_dealt} \times A + \text{survivors} \times C)^D.
+\end{equation*}
+Here \emph{A} is the attack performance weight, \emph{B} the survival
+performance weight, C is the cooperative performance weight and D is
+the exponent on the fitness.
 
+To encourage the variants to find strategies that promote cooperation
+and survival, we have included the number of survivors as a component
+of the fitness function.
