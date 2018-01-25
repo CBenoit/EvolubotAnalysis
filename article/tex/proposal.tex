@@ -6,10 +6,10 @@ NAME\footnote{\url{https://github.com/uuuuu/nnnnn}}.%NEToolKit\footnote{\url{htt
 The Starcraft bot can be found on Github as well under the name of
 BOT NAME\footnote{\url{https://github.com/uuuuu/nnnnn}}.%Evolubot\footnote{\url{https://github.com/CBenoit/Evolubot}}.
 
-The analysis of the data was performed with the R language. Source can, again,
+The analysis of the data was performed with the R language. Sources can, again,
 be found on Github\footnote{\url{https://github.com/uuuuu/nnnnn}}.%\footnote{\url{https://github.com/CBenoit/EvolubotAnalysis}}.
 
-We want to evualate several techniques that are the following:
+We want to evaluate several techniques that are the following:
 \begin{itemize}
     \item \emph{Vanilla NEAT}. The default NEAT, as described in Sub-Section~\ref{subsec:neat}. One generation is evaluated with one game
         where every unit is an individual with its own neural network. Therefore, the fitness is individual on a per unit basis.
@@ -22,6 +22,9 @@ We want to evualate several techniques that are the following:
         The fitness of an indivual is computed by how well all the controlled units performs. Each unit still has its own neural network
         but, they're all obtained by using the genome of the individual being evualated.
 \end{itemize}
+
+{\bf NOTE:}
+Not only victory, evaluate losses as well.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Transfered this section from the experiment design section. I think

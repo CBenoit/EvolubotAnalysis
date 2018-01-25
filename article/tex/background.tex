@@ -1,0 +1,136 @@
+\section{Background}\label{section:background}
+
+\subsection{Starcraft}
+
+The Starcraft gameflow follow the "gather-build-conquer" pattern. First the player must harvest ressources
+scattered around the battlefield in order to build increasingly advanced units and structures.
+Then he must destroy all the opponents' bases. This requires good thinking, decision making and fast reactions.
+The game features three different races and all units are unique to their respective races,
+performs differently and requires different tactics.
+The game is well known for being well balanced and as such was widely used in competitions.
+Indeed even though each race is unique, has different strengths and abilities, their overall strength
+is the same and no race has an advantage over the other. This is because the game is now quite old
+and the balance have been polished over time via game updates provided by Blizzard Entertainment,
+developer and publisher of the game. It makes this game a great support to develop competitive, modular,
+adaptative agents.
+
+{\bf TODO} Add a recent survey on starcraft research.
+(I found this survey: https://hal.archives-ouvertes.fr/hal-00871001/document from 2013… is there something more recent?)
+
+To create Starcraft: Broodwar agents, the \emph{BWAPI (Brood War
+Application Programming Interface)
+free and open source C++ framework} is widely used by students,
+researchers and hobbyists. This framework isn't an
+official product from Blizzard and access and modify the game state
+by reading and writing directly the memory space of
+the game. As such is considered to be a "hack" that violates the
+End User License Agreement of the game. However, it
+is tolatered by company (and even encouraged given that they provided
+prizes to the tournament sponsorised by AIIDE\footnote{Artificial Intelligence
+and Interactive Digital Entertainment}). Reading / writing directly
+in the memory space of another program is
+considered to be an unsafe method (at least in term of stability) but
+the framework has been used and maintained for a long time and is considered stable.
+It can be configured so as to only reveals the parts of
+the game state that are visibles by the agent, effectively providing only information
+that a real human player would have access to. That way, it is possible to write
+non-cheating AIs that operate under partial information conditions.
+
+\subsection{Micromanagement}
+
+Talk about the micromanagement problem, give some examples, show a
+match picture
+
+{\bf recent works about micromanagement in starcraft:} Add some recent
+works about micro in starcraft, and comment how they all measure
+success strictly as the winning rate of encounters, and how in this
+work we want to extend this area by taking the number of unit lost
+into account.
+
+{\bf WIP}
+Applying reinforcement learning to small scale combat in the strategy
+game starcraft broodwar. Uses Q-learning and Sarsa. \cite{WeWa12}
+
+Connectionist reinforcement learning for intelligent unit micro
+management in starcraft.  Uses neural networks to evaluate Q-values
+for Sarsa reinforcement learning method. Results on incremental
+learning.  Interesting part for reward units: dead units don’t get a
+negative reward for dying.  Instead the reward of the dead unit is the
+average reward of all living units in the next state.  It introduce a
+sort of cooperative behaviour. See neural-fitted Q-iteration. \cite{ShBeWi11}
+
+NeuroEvolution for micromanagement in rts game starcraft bw. About
+battle micromanagement and NEAT vs rtNEAT. \cite{ShWa13}
+{\bf WIP}
+
+\subsection{NEAT}\label{subsec:neat}
+
+NEAT is a \emph{NeuroEvolution} method. The principle is to
+\emph{start with a minimal topology and grow it} to match the problem
+difficulty in order to find an appropriate network.  It does that by
+adding and removing neurons, changing weights, adding connections, ...
+Any neuron can be connected to any neuron including itself, meaning
+even \emph{recurrent neural networks} can be generated.  At each
+generation high fitness networks get better chance of
+reproduction. But even so, \emph{NEAT maintains genetic diversity}
+through a process called \emph{speciation}. That is, similar networks
+are considered to be in the same species. Then, to encourage
+innovation, \emph{explicit fitness sharing} is performed on members of
+the same species. Each species is assigned a number of offsprings it
+can produce. Then species' members compete against each
+others. \cite{StMi02}
+
+Various variant of the method has been created to answer specific
+problems such as \emph{Cascade-NEAT}.
+
+\subsection{Cascade-NEAT}\label{subsec:cascade-neat}
+
+Cascade-NEAT is a variant of NEAT which aims at \emph{restricting the neural network
+search space to topologies that have a so-called cascade architecture}. That is
+a topology where all hidden neuron is connected to all other neurons and
+only connections associated with the most recently added hidden neuron are evolved.
+This method is said to be good for fractured problems such as the concentric spirals
+problem with a high degree of interwining or the keepaway soccer problem.
+A non fractured problem is a problem where the correct action for one state
+resssemble to the one for the neighboring states. The variation is smooth
+and infrequent whereas in a fractured problem the correct action changes
+repeatedly and discontinously.
+However, cascade-NEAT performs very poorly on some problems requiring recurrent
+connectivity patterns since it cannot produce such patterns. An example of
+such failure is the non-Markovian double pole-balancing problem for which
+cascade-NEAT doesn't find a single suitable solution whereas the standard NEAT
+performs very well \cite{KoAS09} \cite{KoMi09}.
+
+\subsection{Novelty search}\label{subsec:novelty-search}
+
+Novelty Search is an approach that, instead of rewarding progressing toward a
+fixed objective, \emph{rewards being different from others solutions and past ones}.
+Usually, evolutionary algorithm measures how close the solution is to the goal
+in order to perform the selection processus. Novelty Search, rather measure
+distance (i.e.: behavioural, positional, …) between solutions to do that.
+\emph{Sometimes not explicitly looking for the objective
+leads to finding a solution faster}.
+In particular in the case of \emph{deceptive problems}. Indeed, intermediate steps
+may requires to evolve towards a totally different direction.
+In that case, objective-oriented algorithm may stuck itself
+in a local optima and cause the search to fail.
+\citet{LeSt11} demonstrated this with an experiment where a robot controlled by a
+neural network have to find a specific location in a maze.
+A solution novelty is characterized by the end location of the robot
+compared to all others. Only Novelty Search was able
+to find the goal in the deceptive maze.
+
+\subsection{Potential fields}\label{subsec:potential-fields}
+
+Also called Artificial Potential Fields (APF), Potential Fields is a method
+using \emph{attracting and repelling fields in the space} mainly used for maneuvering.
+The sum of all the fields given the agent's position is used to determine the
+direction for its next move. The more an agent is close to a field's center,
+the more the said field's force is stronger and conversely.
+It was originally used to make robots navigate between obstacles. Obstacles are
+given a repelling field while the objective is given an attractive field. [source?]
+However, using it in RTS games has been explored as well \cite{HaJo08}.
+\citet{BoAu12} applied this method to StarCraft micromanagement along with
+a multi-objective evolutionary algorithm called NSGA-II to optimize it automatically.
+
+???\citet{SiSuBa14}???
