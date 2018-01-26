@@ -16,10 +16,15 @@ by the standard starcraft controller. Four unit matchups were defined:
     \item 22 vultures vs 22 zealots
 \end{enumerate}
 
+\begin{figure}
+    \includegraphics[width=.5\textwidth]{figures/scenario_map_overview}
+    \caption{The map used for all matchups}\label{fig:map_overview}
+\end{figure}
+
 In these matchups, the marines have stimpacks, but no other upgrades
-are added to the units. The match occurs in a custom map with two obstacles
-on the middle of the map, and the units of both sides start at
-opposite ends of the map.
+are added to the units. The match occurs in a custom map with four small obstacles
+on the middle, and the units of both sides start at
+opposite ends of the map as shown on Figure~\ref{fig:map_overview}.
 
 The units matchup were chosen to see if the controller could learn a
 kiting behavior that helps preserve units. Additionally, the case of
@@ -114,6 +119,8 @@ Also, for the Cascade Neat variant, some mutation probabilities are modified:
 
 These parameters were either taken from existing literature, or
 obtained through experimentation.
+
+{\bf TODO} cite sources for parameters values.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
