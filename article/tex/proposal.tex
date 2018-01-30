@@ -23,14 +23,51 @@ We want to evaluate several techniques that are the following:
         but, they're all obtained by using the genome of the individual being evualated.
 \end{itemize}
 
-{\bf TODO:} discuss networks inputs and outputs.
+We consider that in an actual game, being able to preserve one's
+units can be as important as being able to defeat the enemy units.
+Therefore, in this study we will measure survival rates as well.
 
-{\bf NOTE:}
-Not only victory, evaluate losses as well.
+\subsection{Neural Networks Inputs and Outputs}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Transfered this section from the experiment design section. I think
-% it is better to discuss the fitness function used here.
+For all the matchups, we will generate networks with at least the following inputs:
+\begin{itemize}
+    \item The \emph{cooldown} of the ground weapon.
+    \item The \emph{distance} to the \emph{closest enemy}.
+    \item The \emph{number} of enemies \emph{in sight}.
+    \item The \emph{distance} to the \emph{closest allies}.
+    \item The \emph{number} of allies \emph{in sight}.
+\end{itemize}
+
+And the following outputs:
+\begin{itemize}
+    \item \emph{Attack} the weakest enemy in sight.
+    \item \emph{Retreat} from the battlefield: \emph{draw away from enemies in sight}.
+    \item \emph{Spread out}: \emph{draw away from allies in sight}.
+    \item \emph{Gathering}: get close to \emph{allies in sight}.
+\end{itemize}
+
+In addition, marines get one additional input and output:
+\emph{whether it is stimmed or not} as the input and \emph{use a stimpack} as the output.
+
+\subsection{Fitness Specification}
+
+The weights are used to model the fitness function. There are two
+fitness functions, according to whether the Unified NEAT variant is
+being used or not.  The regular fitness function is given by
+\begin{equation*}
+  (\text{damages\_dealt} \times A + \text{health} \times B + \text{survivors} \times C)^D,
+\end{equation*}
+while the fitness for the Unified NEAT variant is
+\begin{equation*}
+  (\text{damages\_dealt} \times A + \text{survivors} \times C)^D.
+\end{equation*}
+Here \emph{A} is the attack performance weight, \emph{B} the survival
+performance weight, C is the cooperative performance weight and D is
+the exponent on the fitness.
+
+To encourage the variants to find strategies that promote cooperation
+and survival, we have included the number of survivors as a component
+of the fitness function.
 
 Novelty currently just use fitness as novelty metrics. Not best use case at
 all for this method.
