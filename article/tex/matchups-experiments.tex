@@ -117,10 +117,8 @@ Also, for the Cascade Neat variant, some mutation probabilities are modified:
     \bottomrule
 \end{tabular}
 
-These parameters were either taken from existing literature, or
-obtained through experimentation.
-
-{\bf TODO} cite sources for parameters values.
+These parameters were mostly taken from existing literature, that is the
+original NEAT paper \cite{StMi02} and \cite{KoAS09}.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -149,22 +147,3 @@ can perceive.  This is used for normalization purposes. All values
 greater than these will result in the value \(1\) being fed as the
 input so that all inputs are in range \([0, 1]\).
 
-\subsection{Fitness Specification}
-
-The weights are used to model the fitness function. There are two
-fitness functions, according to whether the Unified NEAT variant is
-being used or not.  The regular fitness function is given by
-\begin{equation*}
-  (\text{damages\_dealt} \times A + \text{health} \times B + \text{survivors} \times C)^D,
-\end{equation*}
-while the fitness for the Unified NEAT variant is
-\begin{equation*}
-  (\text{damages\_dealt} \times A + \text{survivors} \times C)^D.
-\end{equation*}
-Here \emph{A} is the attack performance weight, \emph{B} the survival
-performance weight, C is the cooperative performance weight and D is
-the exponent on the fitness.
-
-To encourage the variants to find strategies that promote cooperation
-and survival, we have included the number of survivors as a component
-of the fitness function.

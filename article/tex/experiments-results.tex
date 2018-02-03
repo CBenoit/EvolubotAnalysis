@@ -10,31 +10,34 @@ survival ratios. A summary of these results is presented in
 Table~\ref{table:quantitative}.
 
 \begin{table}
-  \caption{Victory Ratio and Median Survival for the best
-    genomes. Survival values only consider victory matches.}
-  \label{table:quantitative}
-  \begin{tabular}{llll}
-    \hline
-    Variant & Matchup & Win Ratio & Survival\\
-    \hline
-    Vanilla & marine/marine & 0.77 & 8 \\
-    Unified & marine/marine & 0.77 & 8 \\
-    Cascade & marine/marine & 0.85 & 8 \\
-    Novelty & marine/marine & 0.55 & 8 \\
-    Vanilla & marine/zergling & 0.03 & 4 \\
-    Unified & marine/zergling & 0.01 & 10 \\
-    Cascade & marine/zergling & 0.05 & 5 \\
-    Novelty & marine/zergling & 0.09 & 10 \\
-    Vanilla & vulture/vulture & 0.92 & 8 \\
-    Unified & vulture/vulture & 0.90 & 10 \\
-    Cascade & vulture/vulture & 0.93 & 8 \\
-    Novelty & vulture/vulture & 0.93 & 9 \\
-    Vanilla & vulture/zealot & 0.87 & 8 \\
-    Unified & vulture/zealot & 0.93 & 9 \\
-    Cascade & vulture/zealot & 0.92 & 9 \\
-    Novelty & vulture/zealot & 0.99 & 9 \\
-    \hline
-  \end{tabular}
+    \caption{Victory Ratio and Median Survival for the best genomes.
+            Survival values only consider victory matches.}
+    \label{table:quantitative}
+    \begin{tabular}{llll}
+        \toprule
+        Variant & Matchup & Win Ratio & Survival \\
+        \midrule
+        Vanilla & marine/marine & 0.77 & 8 \\
+        Unified & marine/marine & 0.77 & 8 \\
+        Cascade & marine/marine & 0.85 & 8 \\
+        Novelty & marine/marine & 0.55 & 8 \\[1ex]
+
+        Vanilla & marine/zergling & 0.03 & 4 \\
+        Unified & marine/zergling & 0.01 & 10 \\
+        Cascade & marine/zergling & 0.05 & 5 \\
+        Novelty & marine/zergling & 0.09 & 10 \\[1ex]
+
+        Vanilla & vulture/vulture & 0.92 & 8 \\
+        Unified & vulture/vulture & 0.90 & 10 \\
+        Cascade & vulture/vulture & 0.93 & 8 \\
+        Novelty & vulture/vulture & 0.93 & 9 \\[1ex]
+
+        Vanilla & vulture/zealot & 0.87 & 8 \\
+        Unified & vulture/zealot & 0.93 & 9 \\
+        Cascade & vulture/zealot & 0.92 & 9 \\
+        Novelty & vulture/zealot & 0.99 & 9 \\
+        \bottomrule
+    \end{tabular}
 \end{table}
 
 % \subsubsection{Victory Rate Analysis}
@@ -75,7 +78,7 @@ Finally, we observed the training progress of the
 experiment. Figure~\ref{fig:evolution} show two examples of training
 graphs that are representative of the experiment as a
 whole\footnote{the figures for all matchings can be found at the
-  online repository}. In the Cascade NEAT training (left side) we see
+online repository}. In the Cascade NEAT training (left side) we see
 that while there is a small increase in best and mean fitness, there
 are large variations every generation. In the Unified NEAT training
 (right side) these variations are not present. In unified neat, all
