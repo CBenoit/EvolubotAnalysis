@@ -64,32 +64,42 @@ of inputs and outputs as a human player.
 
 \subsection{Micromanagement}
 
-Talk about the micromanagement problem, give some examples, show a
-match picture
+In this study we focus on the \emph{Micromanagement} (Micro) aspect of
+an Starcraft controller. Micro refers to the control of individual
+units involved in a tactical combat. This involves sending commands to
+each individual unit as a player would do, such as ``atack unit A'' or
+``move to position X,Y''. 
 
-{\bf recent works about micromanagement in starcraft:} Add some recent
-works about micro in starcraft, and comment how they all measure
-success strictly as the winning rate of encounters, and how in this
-work we want to extend this area by taking the number of unit lost
-into account.
+{\bf TODO BENOIT: Add an interesting combat picture here}
 
-{\bf WIP}
-Applying reinforcement learning to small scale combat in the strategy
-game starcraft broodwar. Uses Q-learning and Sarsa. \cite{WeWa12}
+There are many approaches to developing Starcraft micro
+controllers. Wender and Watson investigate the viability of
+Reinforcement Learning to this task~\cite{WeWa12}. They show that a
+variety of RL techniques could achieve 100\% win ratios in small
+combat situations, by controlling two actions: ``Attack'' and
+``Retreat''.
 
-Connectionist reinforcement learning for intelligent unit micro
-management in starcraft.  Uses neural networks to evaluate Q-values
-for Sarsa reinforcement learning method. Results on incremental
-learning.  Interesting part for reward units: dead units don’t get a
-negative reward for dying.  Instead the reward of the dead unit is the
-average reward of all living units in the next state.  It introduce a
-sort of cooperative behaviour. See neural-fitted Q-iteration. \cite{ShBeWi11}
+Shantia et al. explore the use of neural networks to also order a unit
+to ``attack'' or ``flee''~\cite{ShBeWi11}. The weights of the neural
+network are adjusted by a RL algorithm. They show that you can train
+the neural network on smaller combats (3x3) to perform well in larger
+engagements (6x6).
 
-NeuroEvolution for micromanagement in rts game starcraft bw. About
-battle micromanagement and NEAT vs rtNEAT. \cite{ShWa13}
+More recently, Neuro Evolution has become a popular approach for
+training Starcraft controllers. Zhen and Watson show a comparison of
+NEAT and rtNEAT~\cite{ShWa13} for training a micro controller (also
+using ``Attack'' and ``Retreat''). Their setup includes four classes
+of engagement (ranged vs melee, melee vs melee, ranged vs ranged and
+melee vs ranged), each with two teams of 12 units. They remark how the
+unit composition of the match up has an effect on the variability of
+the result.
 
-???\citet{SiSuBa14}???
-{\bf WIP}
+One thing that all of these approaches (and a few others) have in
+common is that the evaluation of the training is based on the win
+ratio and the number of enemies killed. In this study, we want to
+explore how to achieve a more ``humane'' behavior, i.e. achieving
+victories while at the same time conserving the fighting force and
+maximizing the number of surviving units.
 
 \subsection{NEAT}\label{subsec:neat}
 
