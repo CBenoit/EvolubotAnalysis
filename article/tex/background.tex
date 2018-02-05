@@ -103,23 +103,27 @@ maximizing the number of surviving units.
 
 \subsection{NEAT}\label{subsec:neat}
 
-NEAT is a \emph{NeuroEvolution} method. The principle is to
-\emph{start with a minimal topology and grow it} to match the problem
-difficulty in order to find an appropriate network.  It does that by
-adding and removing neurons, changing weights, adding connections, ...
-Any neuron can be connected to any neuron including itself, meaning
-even \emph{recurrent neural networks} can be generated.  At each
-generation high fitness networks get better chance of
-reproduction. But even so, \emph{NEAT maintains genetic diversity}
-through a process called \emph{speciation}. That is, similar networks
-are considered to be in the same species. Then, to encourage
-innovation, \emph{explicit fitness sharing} is performed on members of
-the same species. Each species is assigned a number of offsprings it
-can produce. Then species' members compete against each
-others. \cite{StMi02}
+NEAT (\emph{Neuro Evolution of Augmented Topologies}) is a machine
+learning technique which combines neural network and evolutionary
+computation ideas to develop both the weights and the topology
+(structure) of a neural network~\cite{StMi02}.
 
-Various variant of the method has been created to answer specific
-problems such as \emph{Cascade-NEAT}.
+NEAT begins with a minimal topology, and grows it through training in
+order to match the problem difficulty, adding and removing neurons and
+connections and changing weights. Self connections and connections to
+different layers are possible, which means that NEAT can evolve
+recurrent neural networks. Additionally, NEAT includes a speciation
+mechanism to promote genetic diversity in the population.
+
+NEAT was originally demonstrated on the combat game NERO and, since
+then, has been a popular choice for the training of controllers in
+tactical scenarios. The ability to match each unit to a separate
+network in the population, and the ability to progressively learn more
+complex behaviors are two compelling reasons for the use of NEAT in
+Starcraft.
+
+Accordingly, recently variants of NEAT such as rtNEAT and CascadeNEAT
+have also been proposed to answer to specific problems.
 
 \subsection{Cascade-NEAT}\label{subsec:cascade-neat}
 
