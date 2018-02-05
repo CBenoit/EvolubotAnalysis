@@ -115,33 +115,40 @@ different layers are possible, which means that NEAT can evolve
 recurrent neural networks. Additionally, NEAT includes a speciation
 mechanism to promote genetic diversity in the population.
 
-NEAT was originally demonstrated on the combat game NERO and, since
-then, has been a popular choice for the training of controllers in
+rtNEAT is a variant of NEAT for real time problems, which was
+originally demonstrated on the combat game NERO. Since then, NEAT and
+rtNEAT have been popular choices for the training of controllers in
 tactical scenarios. The ability to match each unit to a separate
 network in the population, and the ability to progressively learn more
-complex behaviors are two compelling reasons for the use of NEAT in
-Starcraft.
+complex behaviors are two compelling reasons for the use of
+NEAT/rtNEAT in Starcraft.
 
-Accordingly, recently variants of NEAT such as rtNEAT and CascadeNEAT
-have also been proposed to answer to specific problems.
+Accordingly, recently variants of NEAT such as CascadeNEAT have also
+been proposed to answer to specific problems.
 
 \subsection{Cascade-NEAT}\label{subsec:cascade-neat}
 
-Cascade-NEAT is a variant of NEAT which aims at \emph{restricting the neural network
-search space to topologies that have a so-called cascade architecture}. That is
-a topology where all hidden neuron is connected to all other neurons and
-only connections associated with the most recently added hidden neuron are evolved.
-This method is said to be good for fractured problems such as the concentric spirals
-problem with a high degree of interwining or the keepaway soccer problem.
-A non fractured problem is a problem where the correct action for one state
-resssemble to the one for the neighboring states. The variation is smooth
-and infrequent whereas in a fractured problem the correct action changes
-repeatedly and discontinously.
-However, cascade-NEAT performs very poorly on some problems requiring recurrent
-connectivity patterns since it cannot produce such patterns. An example of
-such failure is the non-Markovian double pole-balancing problem for which
-cascade-NEAT doesn't find a single suitable solution whereas the standard NEAT
-performs very well \cite{KoAS09} \cite{KoMi09}.
+Cascade-NEAT is a variant of NEAT which aims at restricting the neural
+network search space to topologies that have a so-called cascade
+architecture. A cascade architecture means that all hiden neurons are
+connected to all other neurons, and only connections associated with
+the most recently added hidden neuron are modified by the evolutionary
+process.
+
+Kohl~\cite{KoAS09,KoMi09} reports that this method is good for
+fractured problems, such as the concentric spiral clustering problem
+and the keepaway soccer decision problem. However, Cascade-NEAT
+performs very poorly on some problems requiring recurrent connectivity
+patterns, since it cannot produce such patterns. An example of such
+failure is the non-Markovian double pole-balancing problem for which
+cascade-NEAT doesn't find a single suitable solution whereas the
+standard NEAT performs very well.
+
+To our knowledge, Cascade-NEAT has not been applied to the Starcraft
+problem. Because of the similarity of some strategic decisions
+involved in Starcraft micro management and the keepaway soccer problem
+we decided to include Cascade-NEAt as one of the alternatives for the
+current investigation.
 
 \subsection{Novelty search}\label{subsec:novelty-search}
 
