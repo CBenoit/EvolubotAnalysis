@@ -152,33 +152,39 @@ current investigation.
 
 \subsection{Novelty search}\label{subsec:novelty-search}
 
-Novelty Search is an approach that, instead of rewarding progressing toward a
-fixed objective, \emph{rewards being different from others solutions and past ones}.
-Usually, evolutionary algorithm measures how close the solution is to the goal
-in order to perform the selection processus. Novelty Search, rather measure
-distance (i.e.: behavioural, positional, …) between solutions to do that.
-\emph{Sometimes not explicitly looking for the objective
-leads to finding a solution faster}.
-In particular in the case of \emph{deceptive problems}. Indeed, intermediate steps
-may requires to evolve towards a totally different direction.
-In that case, objective-oriented algorithm may stuck itself
-in a local optima and cause the search to fail.
-\citet{LeSt11} demonstrated this with an experiment where a robot controlled by a
-neural network have to find a specific location in a maze.
-A solution novelty is characterized by the end location of the robot
-compared to all others. Only Novelty Search was able
-to find the goal in the deceptive maze.
+Novelty search is a new approach to planning and search algorithms
+where, instead of rewarding the agents for progressing towards a fixed
+objective, agents are rewarded for finding solutions that are different
+from other solutions already found by the algorithm.
+
+Surprisingly, sometimes not explicitly looking for the objective leads
+to finding a solution faster, specially in the case of deceptive
+problems.  Indeed, intermediate steps and partial solutions may
+require an evolution towards a completely different direction than
+that of the final expected result. In these cases, objective-oriented
+algorithms may get stuck in local optima and cause the search to
+fail.
+
+\citet{LeSt11} demonstrated this with an experiment where a robot
+controlled by a neural network has to find a specific location in a
+maze. A solution's novelty is characterized by the end location of the
+robot, compared to all others so far. Only Novelty Search was able to
+find the goal in the deceptive maze.
 
 \subsection{Potential fields}\label{subsec:potential-fields}
 
-Also called Artificial Potential Fields (APF), Potential Fields is a method
-using \emph{attracting and repelling fields in the space} mainly used for maneuvering.
-The sum of all the fields given the agent's position is used to determine the
-direction for its next move. The more an agent is close to a field's center,
-the more the said field's force is stronger and conversely.
-It was originally used to make robots navigate between obstacles. Obstacles are
-given a repelling field while the objective is given an attractive field. [source?]
-However, using it in RTS games has been explored as well \cite{HaJo08}.
-\citet{BoAu12} applied this method to StarCraft micromanagement along with
-a multi-objective evolutionary algorithm called NSGA-II to optimize it automatically.
+Potential Fields, also called Artificial Potential Fields (APF), is a
+method using the idea of attracting and repelling fields in a
+space. It is mainly used for planning tasks involving maneuvering.
+The sum of all the fields given the agent's position is used to
+determine the direction for its next move. The strength of a
+particular field on the agent's movement is proportional to the
+closeness of that agent to the field's center
+
+This algorithm was originally used to make robots navigate between
+obstacles. Obstacles are given a repelling fields while the objective
+is given an attractive field. However, using it in RTS games has been
+explored as well \cite{HaJo08}. \citet{BoAu12} applied this method to
+StarCraft micromanagement along with a multi-objective evolutionary
+algorithm called NSGA-II to optimize the fields automatically.
 
