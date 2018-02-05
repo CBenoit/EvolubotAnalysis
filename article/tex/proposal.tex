@@ -1,35 +1,48 @@
 \section{Proposal}\label{section:proposal}
 
-A fresh C++ implementation of these methods was developed and is hosted on Github under the name of LIBRARY
+A fresh C++ implementation of these methods was developed and is
+hosted on Github under the name of LIBRARY
 NAME\footnote{\url{https://github.com/uuuuu/nnnnn}}.%NEToolKit\footnote{\url{https://github.com/CBenoit/NEToolKit}}.
 
-The Starcraft bot can be found on Github as well under the name of
-BOT NAME\footnote{\url{https://github.com/uuuuu/nnnnn}}.%Evolubot\footnote{\url{https://github.com/CBenoit/Evolubot}}.
+The Starcraft bot can be found on Github as well under the name of BOT
+NAME\footnote{\url{https://github.com/uuuuu/nnnnn}}.%Evolubot\footnote{\url{https://github.com/CBenoit/Evolubot}}.
 
-The analysis of the data was performed with the R language. Sources can, again,
-be found on Github\footnote{\url{https://github.com/uuuuu/nnnnn}}.%\footnote{\url{https://github.com/CBenoit/EvolubotAnalysis}}.
+The analysis of the data was performed with the R language. Sources
+can, again, be found on
+Github\footnote{\url{https://github.com/uuuuu/nnnnn}}.%\footnote{\url{https://github.com/CBenoit/EvolubotAnalysis}}.
 
 We want to evaluate several techniques that are the following:
 \begin{itemize}
-    \item \emph{Vanilla NEAT}. The default NEAT, as described in Sub-Section~\ref{subsec:neat}. One generation is evaluated with one game
-        where every unit is an individual with its own neural network. Therefore, the fitness is individual on a per unit basis.
-    \item \emph{Cascade-NEAT}. The cascade-NEAT variant, as described in Sub-Section~\ref{subsec:cascade-neat}.
-        The evaluation mothed is the same as for vanilla NEAT above.
-    \item \emph{Novelty Search with vanilla NEAT}. The novelty search method as described in Sub-Section~\ref{subsec:novelty-search} applied to the NEAT algorithm.
-        The evaluation methed is the same as for vanilla NEAT above.
-    \item \emph{``Unified'' networks with vanilla NEAT}. For this one, as opposed to the evaluation method explained above, only one indivual is
-        evaluated per game and thus to evaluate a whole generation, a number of games equal to the population size must be processed.
-        The fitness of an indivual is computed by how well all the controlled units performs. Each unit still has its own neural network
-        but, they're all obtained by using the genome of the individual being evualated.
+    \item \emph{Vanilla NEAT}. The default NEAT, as described in
+      Sub-Section~\ref{subsec:neat}. One generation is evaluated with
+      one game where every unit is an individual with its own neural
+      network. Therefore, the fitness is individual on a per unit
+      basis.
+    \item \emph{Cascade-NEAT}. The cascade-NEAT variant, as described
+      in Sub-Section~\ref{subsec:cascade-neat}.  The evaluation mothed
+      is the same as for vanilla NEAT above.
+    \item \emph{Novelty Search with vanilla NEAT}. The novelty search
+      method as described in Sub-Section~\ref{subsec:novelty-search}
+      applied to the NEAT algorithm.  The evaluation methed is the
+      same as for vanilla NEAT above.
+    \item \emph{``Unified'' networks with vanilla NEAT}. For this one,
+      as opposed to the evaluation method explained above, only one
+      indivual is evaluated per game and thus to evaluate a whole
+      generation, a number of games equal to the population size must
+      be processed.  The fitness of an indivual is computed by how
+      well all the controlled units performs. Each unit still has its
+      own neural network but, they're all obtained by using the genome
+      of the individual being evualated.
 \end{itemize}
 
-We consider that in an actual game, being able to preserve one's
-units can be as important as being able to defeat the enemy units.
+We consider that in an actual game, being able to preserve one's units
+can be as important as being able to defeat the enemy units.
 Therefore, in this study we will measure survival rates as well.
 
 \subsection{Neural Networks Inputs and Outputs}
 
-For all the matchups, we will generate networks with at least the following inputs:
+For all the matchups, we will generate networks with at least the
+following inputs:
 \begin{itemize}
     \item The \emph{cooldown} of the ground weapon.
     \item The \emph{distance} to the \emph{closest enemy}.
@@ -47,7 +60,8 @@ And the following outputs:
 \end{itemize}
 
 In addition, marines get one additional input and output:
-\emph{whether it is stimmed or not} as the input and \emph{use a stimpack} as the output.
+\emph{whether it is stimmed or not} as the input and \emph{use a
+  stimpack} as the output.
 
 \subsection{Fitness Specification}
 
@@ -69,6 +83,6 @@ To encourage the variants to find strategies that promote cooperation
 and survival, we have included the number of survivors as a component
 of the fitness function.
 
-Novelty currently just use fitness as novelty metrics. Not best use case at
-all for this method.
+Novelty currently just use fitness as novelty metrics. Not best use
+case at all for this method.
 

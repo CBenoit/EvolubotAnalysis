@@ -4,7 +4,7 @@
 game that has in recent years captured the attention of researchers on
 game-playing artificial intelligence. StarCraft is a complex game that
 can be studied from many different points of view: Strategic Planning,
-Execution of tactical manuevers, Estimation of hidden information
+Execution of tactical maneuvers, Estimation of hidden information
 about the opponent, etc.
 
 In this work, we focus on the problem of ``micro'' in
@@ -17,24 +17,31 @@ special abilities at the right time. Also, the decisions for each of
 these tasks will differ according to the units controlled by the
 player and the opponent.
 
-Micro has been studied by many groups recently, such as {\bf TODO,
-  include some papers and their tools here [UAlbertaBot is a famous example]}.
+Learning approaches for micro in Starcraft and other similar games has
+been studied by many groups recently. For example, Shantia et
+al.~\cite{ShBeWi11} created a micro controller focused around a neural
+network with weights adjusted by Sarsa; Wender and
+Watson~\cite{WeWa12} explored Q-learning and Sarsa; Zhen and
+Watson~\cite{ShWa13} compare NEAT and rtNEAT; and Liu et
+al~\cite{SiSuBa14} influence maps and potential fields.  Although each
+of these works uses a different algorithm to generate the micro
+controller, one thing that they all have in common is that they mostly
+measure success as the win rate, i.e. the total number of combats won
+(although Liu et al. does include some measure of unit loss and
+survivors in their evaluation).
 
-In these studies, a successful micro technique is usually measured by
-the ``win rate'', defined as the percentage of pre-defined encounters
-where all the enemy units have been destroyed by the player
-units. However, in an actual game, being able to preserve your own
-units can be as important as being able to defeat the enemy
-units. Therefore, in this study we {\bf TODO...}
+In this work we want to explore how to evolve a micro controller that
+is able to not only achieve a high win rate, but also do so with as
+few losses as possible. In an actual game, it is important for a player
+to preserve their own forces, so that they can reallocate the remaining
+forces to future battle, and compound their advantage through the match.
 
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Moved this from the ``Experiment Design'' section, remember to rewrite later
-We consider the number of survivors to be a relevent criteria.
-Indeed, a high number of survivors means the skirmish went well
-and in a full game, these survivors can be reallocated to the
-next battle and can thus influence the long term outcome.
-However, this information is not showed as much as we would like to. \citet{SiSuBa14}
-though also included some measurement of loss
-and survivors in their evaluation.
+To achieve this, we propose an evaluation function that takes into
+account the damage taken and the number of surviving units at the end
+of a match, and compare four different NEAT implementations using this
+utility function, as well as Novelty Search. We analyze the results of
+four Match ups (Marines vs Marines, Marines vs Zerg, Vultures vs
+Vultures and Vultures vs Zealots). Quantitatively, none of the
+implemented variants showed a strong difference from current
+results. But a qualitative analysis indicate directions for a more
+humane micromanagement controller.
