@@ -53,13 +53,24 @@ following inputs:
 
 And the following outputs:
 \begin{itemize}
-    \item \emph{Attack} the weakest enemy in sight.
+    \item \emph{Attack} the \emph{weakest enemy in fire range}.
     \item \emph{Retreat} from the battlefield: \emph{draw away from enemies in sight}.
     \item \emph{Spread out}: \emph{draw away from allies in sight}.
     \item \emph{Gathering}: get close to \emph{allies in sight}.
 \end{itemize}
 
+The \emph{attack} action consist of going in the direction of the closest enemy not in fog of war
+and if there are severeral enemies in fire range, attack the weakest one.
 
+As for \emph{retreat, spread out and gathering} actions, a weighted vector is computed
+to lead the agent in a sensible way. This has been used by \citep{WeWa12} as well.
+Our version differ slightly though. For retreat and spread out, it means for the agent to
+get away from other units (enemies and allies) as fast as possible. The repulsive force's strength of an unit to
+get away from is calculated by its proximity with the agent so that the more the unit is close,
+the more urgent it is to get away from it specifically. For the retreat action, ally units
+get a significantly smaller weight than enemy's ones so that the agent avoid collision with
+allies while drawing away from enemies.
+In case of the gathering action, attractive force is given to allies only.
 
 In addition, marines get one additional input and output:
 \emph{whether it is stimmed or not} as the input and \emph{use a
