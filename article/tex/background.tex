@@ -2,42 +2,65 @@
 
 \subsection{Starcraft}
 
-The Starcraft gameflow follow the "gather-build-conquer" pattern. First the player must harvest ressources
-scattered around the battlefield in order to build increasingly advanced units and structures.
-Then he must destroy all the opponents' bases. This requires good thinking, decision making and fast reactions.
-The game features three different races and all units are unique to their respective races,
-performs differently and requires different tactics.
-The game is well known for being well balanced and as such was widely used in competitions.
-Indeed even though each race is unique, has different strengths and abilities, their overall strength
-is the same and no race has an advantage over the other. This is because the game is now quite old
-and the balance have been polished over time via game updates provided by Blizzard Entertainment,
-developer and publisher of the game. It makes this game a great support to develop competitive, modular,
-adaptative agents.
+Starcraft is a \emph{Real Time Strategy} (RTS) game published by
+Blizzard Entertainment. It follows the ``gather-build-conquer''
+pattern, in which each player (human or AI) must gather resources
+available in the play field to build combat units and
+structures. These units are used to attack the other players,
+destroying their units and structures and denying their access to
+resources. The game features a wide variety of combat units, with
+different speeds, attack range, strengths and weakenesses. The balance
+between combat and resource gathering leads to the concepts of
+\emph{micromanagement} (micro) and \emph{macromanagement}
+(macro). Micro are the tactical actions and skills involving
+individual battles between a game, while Macro are the strategic
+decisions such as building management, resource usage, and unit
+creation. A sucessful player (or bot) needs to eventually master
+these two aspects of the game.
 
-{\bf TODO} Add a recent survey on starcraft research.
-(I found this survey: https://hal.archives-ouvertes.fr/hal-00871001/document from 2013… is there something more recent?)
+Development of AI agents for Starcraft is a vibrant research field
+(See surveys by Onta\~non~\cite{OnSyUrRiChPr13} and
+Certicky~\cite{CeCh17}). They highlight that, unlike Go and Chess,
+Starcraft presents Game Playing AI the challenge of dealing with
+real-time, partial information scenarios. Therefore, Starcraft is a
+hard challenge for AI. An unofficial framework for the development of
+AI agents exists in the form of the \emph{Brood Wars API}
+(BWAPI)~\cite{BWAPI}. It allows the user to read and write to the
+game's memory, allowing a wide range of agent types, from agents that
+control limited parts of an AI opponent, to agents with the same range
+of inputs and outputs as a human player.
 
-\cite{OnSyUrRiChPr13}
-\cite{CeCh17}
+% This requires good thinking, decision making and fast reactions.
+% The game features three different races and all units are unique to
+% their respective races, performs differently and requires different
+% tactics.  The game is well known for being well balanced and as such
+% was widely used in competitions.  Indeed even though each race is
+% unique, has different strengths and abilities, their overall
+% strength is the same and no race has an advantage over the
+% other. This is because the game is now quite old and the balance
+% have been polished over time via game updates provided by Blizzard
+% Entertainment, developer and publisher of the game. It makes this
+% game a great support to develop competitive, modular, adaptative
+% agents.
 
-To create Starcraft: Broodwar agents, the \emph{BWAPI (Brood War
-Application Programming Interface)
-free and open source C++ framework} is widely used by students,
-researchers and hobbyists. This framework isn't an
-official product from Blizzard and access and modify the game state
-by reading and writing directly the memory space of
-the game. As such is considered to be a "hack" that violates the
-End User License Agreement of the game. However, it
-is tolatered by company (and even encouraged given that they provided
-prizes to the tournament sponsorised by AIIDE\footnote{Artificial Intelligence
-and Interactive Digital Entertainment}). Reading / writing directly
-in the memory space of another program is
-considered to be an unsafe method (at least in term of stability) but
-the framework has been used and maintained for a long time and is considered stable.
-It can be configured so as to only reveals the parts of
-the game state that are visibles by the agent, effectively providing only information
-that a real human player would have access to. That way, it is possible to write
-non-cheating AIs that operate under partial information conditions.
+% To create Starcraft: Broodwar agents, the \emph{BWAPI (Brood War
+% Application Programming Interface) free and open source C++
+% framework} is widely used by students, researchers and
+% hobbyists. This framework isn't an official product from Blizzard
+% and access and modify the game state by reading and writing directly
+% the memory space of the game. As such is considered to be a "hack"
+% that violates the End User License Agreement of the game. However,
+% it is tolatered by company (and even encouraged given that they
+% provided prizes to the tournament sponsorised by
+% AIIDE\footnote{Artificial Intelligence and Interactive Digital
+% Entertainment}). Reading / writing directly in the memory space of
+% another program is considered to be an unsafe method (at least in
+% term of stability) but the framework has been used and maintained
+% for a long time and is considered stable.  It can be configured so
+% as to only reveals the parts of the game state that are visibles by
+% the agent, effectively providing only information that a real human
+% player would have access to. That way, it is possible to write
+% non-cheating AIs that operate under partial information conditions.
 
 \subsection{Micromanagement}
 
