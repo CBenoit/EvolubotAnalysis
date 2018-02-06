@@ -28,16 +28,15 @@ these tasks will differ according to the units controlled by the
 player and the opponent.
 
 Learning approaches for micro in Starcraft and other similar games has
-been studied by many groups recently. For example, Shantia et
-al.~\cite{Shantia11ConnectionistSC} created a micro controller focused
-around a neural network with weights adjusted by Sarsa; Wender and
-Watson~\cite{Wender12ReinforcementMicroSC} explored Q-learning and
-Sarsa; Zhen and Watson~\cite{Zhen13NeuroEvoSC} compare NEAT and
-rtNEAT; and Liu et al~\cite{Liu14EffectiveMicro} influence maps and
-potential fields.  Although each of these works uses a different
+been studied by many groups recently. For example, \citet{Shantia11ConnectionistSC}
+created a micro controller focused
+around a neural network with weights adjusted by Sarsa;
+\citet{Wender12ReinforcementMicroSC} explored Q-learning and Sarsa;
+\citet{Zhen13NeuroEvoSC} compare NEAT and rtNEAT; and \citet{Liu14EffectiveMicro}
+influence maps and potential fields.  Although each of these works uses a different
 algorithm to generate the micro controller, one thing that they all
 have in common is that they mostly measure success as the win rate,
-i.e. the total number of combats won (although Liu et al. does include
+i.e. the total number of combats won (although \citet{Liu14EffectiveMicro} does include
 some measure of unit loss and survivors in their evaluation).
 
 In this work we want to explore how to evolve a micro controller that
@@ -53,5 +52,5 @@ utility function, as well as Novelty Search. We analyze the results of
 four Match ups (Marines vs Marines, Marines vs Zerg, Vultures vs
 Vultures and Vultures vs Zealots). Quantitatively, none of the
 implemented variants showed a strong difference from current
-results. But a qualitative analysis indicate directions for a more
-humane micromanagement controller.
+results. But a qualitative analysis indicate directions in the way
+behaviours emerged.
