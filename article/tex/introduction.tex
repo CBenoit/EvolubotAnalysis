@@ -1,13 +1,21 @@
+\begin{figure}
+  \includegraphics[width=.45\textwidth]{figures/vultures_vs_zealots_combat}
+  \caption{Our AI controller leading vultures (right) against zealots
+    (left). Our goal is to win small scale combats like this while
+    reducing the number of lost units}
+    \label{fig:combat-example}
+\end{figure}
+
 \section{Introduction}\label{section:introduction}
 
 \emph{Starcraft: Brood Wars} is a Real Time Strategy (RTS) computer
 game that has in recent years captured the attention of researchers on
-game-playing artificial intelligence. StarCraft is a complex game that
-can be studied from many different points of view: Strategic Planning,
-Execution of tactical maneuvers, Estimation of hidden information
-about the opponent, etc.
-
-{\bf TODO: something about the fact that Starcraft is stochastic and hard to predict?}
+game-playing artificial intelligence. Starcraft is a complex game,
+including the fact that incomplete information is available for each
+player, and that its actions are stochastic. Therefore it is a hard
+and interesting challenge for Artificial Intelligence. Also it can be
+approached from several levels, such as Strategic Planning, Execution
+of tactical maneuvers, Estimation of hidden information, etc.
 
 In this work, we focus on the problem of ``micro'' in
 Starcraft. Micro, short for micromanagement, is the problem of
@@ -21,16 +29,16 @@ player and the opponent.
 
 Learning approaches for micro in Starcraft and other similar games has
 been studied by many groups recently. For example, Shantia et
-al.~\cite{Shantia11ConnectionistSC} created a micro controller focused around a neural
-network with weights adjusted by Sarsa; Wender and
-Watson~\cite{Wender12ReinforcementMicroSC} explored Q-learning and Sarsa; Zhen and
-Watson~\cite{Zhen13NeuroEvoSC} compare NEAT and rtNEAT; and Liu et
-al~\cite{Liu14EffectiveMicro} influence maps and potential fields.  Although each
-of these works uses a different algorithm to generate the micro
-controller, one thing that they all have in common is that they mostly
-measure success as the win rate, i.e. the total number of combats won
-(although Liu et al. does include some measure of unit loss and
-survivors in their evaluation).
+al.~\cite{Shantia11ConnectionistSC} created a micro controller focused
+around a neural network with weights adjusted by Sarsa; Wender and
+Watson~\cite{Wender12ReinforcementMicroSC} explored Q-learning and
+Sarsa; Zhen and Watson~\cite{Zhen13NeuroEvoSC} compare NEAT and
+rtNEAT; and Liu et al~\cite{Liu14EffectiveMicro} influence maps and
+potential fields.  Although each of these works uses a different
+algorithm to generate the micro controller, one thing that they all
+have in common is that they mostly measure success as the win rate,
+i.e. the total number of combats won (although Liu et al. does include
+some measure of unit loss and survivors in their evaluation).
 
 In this work we want to explore how to evolve a micro controller that
 is able to not only achieve a high win rate, but also do so with as
