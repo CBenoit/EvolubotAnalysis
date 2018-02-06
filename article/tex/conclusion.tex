@@ -1,7 +1,8 @@
 \section{Conclusion}\label{section:conclusion}
 
 This paper presented a comparison between several methods related to NEAT:
-\emph{standard NEAT, cascade-NEAT, NEAT with novelty search and ``unified'' NEAT} where
+\emph{standard NEAT, cascade-NEAT and NEAT with novelty search} where the whole
+population is evaluated at once in one game as well as \emph{``unified'' NEAT} where
 in one game only one individual whose neural network is used for every unit is evaluated
 instead of evaluating all the population.
 To do so, an open source C++ library for NEAT and a Starcraft Bot using it was developed.
@@ -9,7 +10,18 @@ The default AI was used to measure performance of the Bot by playing against it.
 Four matchups were considered: marines vs marines, marines vs zerglings, vultures vs vultures
 and vultures vs zealots.
 
-The kiting problem is successfully solved by every methods in a very satisfactory way.
+While no statistical difference has been found, behaviours can differs a little bit as seen
+on Subsection~\ref{subsec:qualitative}. Novelty search was able to keep longer the
+stimpack behaviour and did great at encircling the oponent with the spread out behaviour.
+Cascade-NEAT didn't developed the spread out behaviour at all in our observations.
+Unified version developped a spread out behaviour but didn't used it to perform any efficient attack.
+Other than that, behaviours were also quite similar, especially the kiting behaviour is
+successfully developed by every methods in a very satisfactory way. The similarity in behaviours may
+be due to the low granularity of the inputs and outputs of the neural networks.
 
-While no statistical difference has been found behaviours differs a little bit…
+A explained in subsection~\ref{subsec:fitness-specification} the novelty metric is given by
+the fitness of the individual which is not ideal. A better novelty measurement would directly reflect
+the behaviour of the units such the way the agent move or the way it performs kiting. Whereas the fitness
+function can only reflect the behaviour indirectly. Finding a good novelty measurement can be a
+very difficult problem depending on the application, and Starcraft is one of them.
 
