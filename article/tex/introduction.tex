@@ -7,6 +7,8 @@ can be studied from many different points of view: Strategic Planning,
 Execution of tactical maneuvers, Estimation of hidden information
 about the opponent, etc.
 
+{\bf TODO: something about the fact that Starcraft is stochastic and hard to predict?}
+
 In this work, we focus on the problem of ``micro'' in
 Starcraft. Micro, short for micromanagement, is the problem of
 directly controlling a small number of units directly in an engagement
@@ -19,11 +21,11 @@ player and the opponent.
 
 Learning approaches for micro in Starcraft and other similar games has
 been studied by many groups recently. For example, Shantia et
-al.~\cite{ShBeWi11} created a micro controller focused around a neural
+al.~\cite{Shantia11ConnectionistSC} created a micro controller focused around a neural
 network with weights adjusted by Sarsa; Wender and
-Watson~\cite{WeWa12} explored Q-learning and Sarsa; Zhen and
-Watson~\cite{ShWa13} compare NEAT and rtNEAT; and Liu et
-al~\cite{SiSuBa14} influence maps and potential fields.  Although each
+Watson~\cite{Wender12ReinforcementMicroSC} explored Q-learning and Sarsa; Zhen and
+Watson~\cite{Zhen13NeuroEvoSC} compare NEAT and rtNEAT; and Liu et
+al~\cite{Liu14EffectiveMicro} influence maps and potential fields.  Although each
 of these works uses a different algorithm to generate the micro
 controller, one thing that they all have in common is that they mostly
 measure success as the win rate, i.e. the total number of combats won

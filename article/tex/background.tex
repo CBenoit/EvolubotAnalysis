@@ -19,8 +19,8 @@ creation. A sucessful player (or bot) needs to eventually master
 these two aspects of the game.
 
 Development of AI agents for Starcraft is a vibrant research field
-(See surveys by Onta\~non~\cite{OnSyUrRiChPr13} and
-Certicky~\cite{CeCh17}). They highlight that, unlike Go and Chess,
+(See surveys by Onta\~non~\cite{Ontanon13AICompetitionSurvey} and
+Certicky~\cite{Certicky17SurveyCompetitionsBots}). They highlight that, unlike Go and Chess,
 Starcraft presents Game Playing AI the challenge of dealing with
 real-time, partial information scenarios. Therefore, Starcraft is a
 hard challenge for AI. An unofficial framework for the development of
@@ -67,27 +67,27 @@ of inputs and outputs as a human player.
 In this study we focus on the \emph{Micromanagement} (Micro) aspect of
 an Starcraft controller. Micro refers to the control of individual
 units involved in a tactical combat. This involves sending commands to
-each individual unit as a player would do, such as ``atack unit A'' or
+each individual unit as a player would do, such as ``attack unit A'' or
 ``move to position X,Y''. 
 
 {\bf TODO BENOIT: Add an interesting combat picture here}
 
 There are many approaches to developing Starcraft micro
 controllers. Wender and Watson investigate the viability of
-Reinforcement Learning to this task~\cite{WeWa12}. They show that a
+Reinforcement Learning to this task~\cite{Wender12ReinforcementMicroSC}. They show that a
 variety of RL techniques could achieve 100\% win ratios in small
 combat situations, by controlling two actions: ``Attack'' and
 ``Retreat''.
 
 Shantia et al. explore the use of neural networks to also order a unit
-to ``attack'' or ``flee''~\cite{ShBeWi11}. The weights of the neural
+to ``attack'' or ``flee''~\cite{Shantia11ConnectionistSC}. The weights of the neural
 network are adjusted by a RL algorithm. They show that you can train
 the neural network on smaller combats (3x3) to perform well in larger
 engagements (6x6).
 
 More recently, Neuro Evolution has become a popular approach for
 training Starcraft controllers. Zhen and Watson show a comparison of
-NEAT and rtNEAT~\cite{ShWa13} for training a micro controller (also
+NEAT and rtNEAT~\cite{Zhen13NeuroEvoSC} for training a micro controller (also
 using ``Attack'' and ``Retreat''). Their setup includes four classes
 of engagement (ranged vs melee, melee vs melee, ranged vs ranged and
 melee vs ranged), each with two teams of 12 units. They remark how the
@@ -106,7 +106,7 @@ maximizing the number of surviving units.
 NEAT (\emph{Neuro Evolution of Augmented Topologies}) is a machine
 learning technique which combines neural network and evolutionary
 computation ideas to develop both the weights and the topology
-(structure) of a neural network~\cite{StMi02}.
+(structure) of a neural network~\cite{Stanley02Neat}.
 
 NEAT begins with a minimal topology, and grows it through training in
 order to match the problem difficulty, adding and removing neurons and
@@ -135,7 +135,7 @@ connected to all other neurons, and only connections associated with
 the most recently added hidden neuron are modified by the evolutionary
 process.
 
-Kohl~\cite{KoAS09,KoMi09} reports that this method is good for
+Kohl~\cite{Kohl09FracturedProblems, Kohl09StrategicDecisions} reports that this method is good for
 fractured problems, such as the concentric spiral clustering problem
 and the keepaway soccer decision problem. However, Cascade-NEAT
 performs very poorly on some problems requiring recurrent connectivity
@@ -165,7 +165,7 @@ that of the final expected result. In these cases, objective-oriented
 algorithms may get stuck in local optima and cause the search to
 fail.
 
-\citet{LeSt11} demonstrated this with an experiment where a robot
+\citet{Lehman11Novelty} demonstrated this with an experiment where a robot
 controlled by a neural network has to find a specific location in a
 maze. A solution's novelty is characterized by the end location of the
 robot, compared to all others so far. Only Novelty Search was able to
@@ -184,7 +184,7 @@ closeness of that agent to the field's center
 This algorithm was originally used to make robots navigate between
 obstacles. Obstacles are given a repelling fields while the objective
 is given an attractive field. However, using it in RTS games has been
-explored as well \cite{HaJo08}. \citet{BoAu12} applied this method to
+explored as well \cite{Hagelback08RTSPotentialFields}.
+\citet{Svendsen12SCPotentialFieldsGP} applied this method to
 StarCraft micromanagement along with a multi-objective evolutionary
 algorithm called NSGA-II to optimize the fields automatically.
-

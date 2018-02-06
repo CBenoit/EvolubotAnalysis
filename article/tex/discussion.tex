@@ -1,8 +1,47 @@
 \section{Discussion}\label{section:discussion}
 
-TODO
+All the experiments where done in stochastic conditions, meaning that there is a
+probability of hitting the target or missing it and the amount of damages
+can vary.
+We ran experiments at full speed, that is without any sleeping frame.
+However, \citet{Liu14EffectiveMicro} discovered that game speed affects outcomes as well
+and it's thus preferable to not use the fastest settings possible.
+By the time we saw that, there was no time remaining to start again from scratch.
+Moreover we didn't averaged individual fitness over multiple runs so it's possible that
+good individuals were killed early and didn't passed their genes.
+One solution to mitigate this problem is to run several games with the
+same population and compute indivial fitness from the average of each game.
 
-Right inputs? Enough? Not Enough? (add reference to an article using interesting inputs system)
+One problem with neural networks is always the inputs and outputs.
+Are the inputs useful? Is there enough of them? Should we increase granularity
+in the output choices? For instance, instead of just using an hardcoded procedure
+to decide which unit to attack, we could let the network decide alone and select
+the enemy itself. On one hand, a few adequate inputs/outputs speed up considerably
+the evolution procedure while on the other hand, bigger granularity let room for more
+emergent behaviours but slow down the evolution. It's also possible to find no viable
+solution either because there is not enough inputs, no useful inputs or because
+a very long time is required because of big granularity. It's all a tradeoff.
+For instance, a grid based vision has been used by \citet{Shantia11ConnectionistSC} but the method
+used is quite different and do not use NEAT. We believe that all the NEAT variants
+explained in this paper aren't adequates for a neural network with high dimensionality
+and maybe the HyperNEAT variant which is specifically designed to exploit geometric
+properties of big neural networks is better suited for this kind of
+problem~\cite{Stanley09HyperNEAT, Gauci10TopographicRegularities}. It has been
+successfully applied to play the Go game~\cite{Gauci10Go}.
 
-Experiments ran at full speed (not sleeping frame). I saw in an article that it has an impact on random generator quality... [FIND REF]
+Cascade-NEAT wasn't really better than standard NEAT.
+This is probably because the problems used were in fact not that fractured.
+Moreover, it doesn't performs more bad either which can mean that
+no reccurent neural network is required to solve the problem like in the
+non-Markovian double pole-balancing problem where a reccurence is absolutely
+required~\cite{Kohl09FracturedProblems}.
 
+In subsection \ref{subsec:spreading} we talked about a spreading behaviour which
+allowed vultures to quickly gain large vision on the map and then converge on the enemy
+position from several sides. We think this is an interesting behaviour that is good
+to replicate. That being said, the pure neural approach is probably not the best for that and
+Potential Fields seems be very good for this kind of problems~\cite{Hagelback08RTSPotentialFields, Svendsen12SCPotentialFieldsGP}
+and should be explored even more. It may be interesting to study a possible mixed usage of both.
+Sometimes a good mixed usage surpass both methods individually like for neural-fitted
+Q-learning~\cite{Riedmiller05NeuralFittedQ} or neural-fitted Sarsa~\cite{Shantia11ConnectionistSC}
+(neural network and temporal difference learning together).
