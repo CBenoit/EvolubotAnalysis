@@ -1,62 +1,75 @@
 \section{Discussion}\label{section:discussion}
 
-All the experiments where done in stochastic conditions, meaning that there is a
-probability of hitting the target or missing it and the amount of damages
-can vary.
-We ran experiments at full speed, that is without any sleeping frame.
-However, \citet{Liu14EffectiveMicro} discovered that game speed affects outcomes as well
-and it's thus preferable to not use the fastest settings possible.
-By the time we saw that, there was no time remaining to start again from scratch.
-Moreover we didn't averaged individual fitness over multiple runs so it's possible that
-good individuals were killed early and didn't passed their genes.
-One solution to mitigate this problem is to run several games with the
-same population and compute indivial fitness from the average of each game.
+All the experiments were done in stochastic conditions, meaning that
+there is a probability of hitting the target or missing it and the
+amount of damage can vary.  We ran experiments at full speed, that is
+without any sleeping frames.  However, \citet{Liu14EffectiveMicro}
+reported that game speed affects outcomes as well and it's thus
+preferable to not use the fastest settings possible.  By the time we
+saw that, there was no time remaining to start again from scratch.
+Moreover, each individual is evaluated on a signle game, so it is possible
+that some good individuals were lost by bad luck, and didn't pass on
+their genes. One solution to mitigate this problem is to run
+several games with the same population and compute indivial fitness
+from the average of each game.
 
-One problem with neural networks is always the inputs and outputs.
-Are the inputs useful? Is there enough of them? Should we increase granularity
-in the output choices? For instance, instead of just using an hardcoded procedure
-to decide which unit to attack, we could let the network decide alone and select
-the enemy itself. On one hand, a few adequate inputs/outputs speed up considerably
-the evolution procedure while on the other hand, bigger granularity let room for more
-emergent behaviours but slow down the evolution. It's also possible to find no viable
-solution either because there is not enough inputs, no useful inputs or because
-a very long time is required because of big granularity. It's all a tradeoff.
-For instance, a grid based vision has been used by \citet{Shantia11ConnectionistSC} but the method
-used is quite different and do not use NEAT. We believe that all the NEAT variants
-explained in this paper aren't adequates for a neural network with high dimensionality
-and maybe the HyperNEAT variant which is specifically designed to exploit geometric
-properties of big neural networks is better suited for this kind of
-problem~\cite{Stanley09HyperNEAT, Gauci10TopographicRegularities}. It has been
-successfully applied to play the Go game~\cite{Gauci10Go}.
+A common issue with neural networks is choosing the inputs and
+outputs. Are the inputs useful? Are there enough of them? Should we
+increase granularity in the output choices? For instance, instead of
+just using an hardcoded procedure to decide which unit to attack, we
+could let the network decide and select the enemy itself. On one hand,
+a small number of adequate inputs/outputs speed up the evolution
+procedure considerably, while on the other hand, bigger granularity
+leaves room for more emergent behaviours but slow down the
+evolution. It's also possible to find no viable solution either
+because there are not enough inputs, no useful inputs or because a
+very long time is required due to big granularity. It's all a
+tradeoff.  For instance, a grid based vision has been used by
+\citet{Shantia11ConnectionistSC} but the method used is quite
+different and do not use NEAT. We believe that all the NEAT variants
+explained in this paper are not adequate for a neural network with
+high dimensionality and maybe the HyperNEAT variant which is
+specifically designed to exploit geometric properties of big neural
+networks would be better suited for this kind of
+problem~\cite{Stanley09HyperNEAT, Gauci10TopographicRegularities}. For
+example, it has been successfully applied to play the Go
+game~\cite{Gauci10Go}.
 
-Cascade-NEAT wasn't really better than standard NEAT.
-This is probably because the problems used were in fact not that fractured.
-Moreover, it doesn't performs more bad either which can mean that
-no reccurent neural network is required to solve the problem like in the
-non-Markovian double pole-balancing problem where a reccurence is absolutely
-required~\cite{Kohl09FracturedProblems}.
+Cascade-NEAT wasn't really better than standard NEAT.  This is
+probably because the problems used were in fact not that fractured.
+Moreover, it doesn't performs worse either which can mean that no
+recurrent neural network is required to solve the problem, unlike in
+the non-Markovian double pole-balancing problem where a recurrence is
+absolutely required~\cite{Kohl09FracturedProblems}.
 
-In subsection \ref{subsec:spreading} we talked about a spreading behaviour which
-allowed vultures to quickly gain large vision on the map and then converge on the enemy
-position from several sides. We think this is an interesting behaviour that is good
-to replicate. That being said, the pure neural approach is probably not the best for that and
-Potential Fields seems be very good for this kind of problems~\cite{Hagelback08RTSPotentialFields, Svendsen12SCPotentialFieldsGP}
-and should be explored even more. It may be interesting to study a possible mixed usage of both.
-Sometimes a good mixed usage surpass both methods individually like for neural-fitted
-Q-learning~\cite{Riedmiller05NeuralFittedQ} or neural-fitted Sarsa~\cite{Shantia11ConnectionistSC}
-(neural network and temporal difference learning together).
+In subsection \ref{subsec:spreading} we talked about a spread out
+behaviour which allowed vultures to quickly gain large vision on the
+map and then converge on the enemy position from several sides. We
+think this is an interesting behaviour that is good to replicate. That
+being said, the pure neural approach is probably not the best for that
+and Potential Fields seems be very good for this kind of
+problems~\cite{Hagelback08RTSPotentialFields,
+  Svendsen12SCPotentialFieldsGP} and should be explored even more. It
+may be interesting to study a possible mixed usage of both.  Sometimes
+a good mixed usage surpass both methods individually, such as for
+neural-fitted Q-learning~\cite{Riedmiller05NeuralFittedQ} or
+neural-fitted Sarsa~\cite{Shantia11ConnectionistSC} (neural network
+and temporal difference learning together).
 
 It might be fruitful to introduce co-evolution as well by evolving
-both sides so that an arm-race takes place and increasingly complex
+both sides so that an arms-race takes place and increasingly complex
 behaviours are created beyond what the default Starcraft AI can offer.
-Indeed, the default AI do not really use effective micro. It only
-orders attacks or retreat in simple ways. That means our neural networks
-aren't trained at all to fight against an opponent who use effective micro.
+Indeed, the default AI does not really use effective micro. It only
+orders attacks or retreat in simple ways. That means our neural
+networks aren't trained at all to fight against an opponent who use
+effective micro.
 
-We didn't evaluated the winning speed either. As pointed by \citet{Liu14EffectiveMicro},
-``timing'' is an important component as well. Indeed, if a combat takes a long time,
-this might allow the opponent to relocate its troops and fightback.
-Adding timer as well is a good idea to prevent evaluation from running too long,
-especially if some units are abusing retreating and don't fightback. It's even more
-important for co-evolution since both sides might end up only avoiding each others.
-This should not be rewarded and the game should stop at a certain point.
+We didn't evaluated the winning speed either. As pointed by
+\citet{Liu14EffectiveMicro}, ``timing'' is an important component as
+well. Indeed, if a combat takes a long time, this might allow the
+opponent to relocate its troops and fight back.  Adding timer as well
+would be a good idea to prevent the evaluation from running too long,
+especially if some units are abusing retreating and don't
+fight back. It's even more important for co-evolution since both sides
+might end up only avoiding each other.  This should not be rewarded
+and the game should stop at a certain point.
