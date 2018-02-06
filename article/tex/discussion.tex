@@ -45,3 +45,18 @@ and should be explored even more. It may be interesting to study a possible mixe
 Sometimes a good mixed usage surpass both methods individually like for neural-fitted
 Q-learning~\cite{Riedmiller05NeuralFittedQ} or neural-fitted Sarsa~\cite{Shantia11ConnectionistSC}
 (neural network and temporal difference learning together).
+
+It might be fruitful to introduce co-evolution as well by evolving
+both sides so that an arm-race takes place and increasingly complex
+behaviours are created beyond what the default Starcraft AI can offer.
+Indeed, the default AI do not really use effective micro. It only
+orders attacks or retreat in simple ways. That means our neural networks
+aren't trained at all to fight against an opponent who use effective micro.
+
+We didn't evaluated the winning speed either. As pointed by \citet{Liu14EffectiveMicro},
+``timing'' is an important component as well. Indeed, if a combat takes a long time,
+this might allow the opponent to relocate its troops and fightback.
+Adding timer as well is a good idea to prevent evaluation from running to long,
+especially if some units are abusing retreating and don't fightback. It's even more
+important for co-evolution since both sides might end up only avoiding each others.
+This should not be rewarded and the game should stop at a certain point.
