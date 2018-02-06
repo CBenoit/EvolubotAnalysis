@@ -1,101 +1,114 @@
-\section{Proposal}\label{section:proposal}
+\section{Experimental Framework}\label{section:proposal}
 
-A fresh C++ implementation of these methods was developed and is
-hosted on Github under the name of LIBRARY
-NAME\footnote{\url{https://github.com/uuuuu/nnnnn}}.%NEToolKit\footnote{\url{https://github.com/CBenoit/NEToolKit}}.
+In order to to execute the proposed study, the following framework
+with three components was implemented. NEAT and the studied varients
+were implemented as a C++ library. The bot that connects to BWAPI,
+performs the learning and combat tasks, and logs the resulting data
+was also implemented as a C++ project. The scripts for data analysis
+were implemented as an R project. The source code and data files for
+each of these components are available at the following repositories:
+{\bf LIBRARYNAME\footnote{\url{https://github.com/uuuuu/nnnnn}}}, {\bf
+  BOTNAME\footnote{\url{https://github.com/uuuuu/nnnnn}}}, and {\bf
+  ANALYSISNAME\footnote{\url{https://github.com/uuuuu/nnnnn}}}
 
-The Starcraft bot can be found on Github as well under the name of BOT
-NAME\footnote{\url{https://github.com/uuuuu/nnnnn}}.%Evolubot\footnote{\url{https://github.com/CBenoit/Evolubot}}.
+%NEToolKit\footnote{\url{https://github.com/CBenoit/NEToolKit}}
+%Evolubot\footnote{\url{https://github.com/CBenoit/Evolubot}}.
+%Evolubot_Analysis{\url{https://github.com/CBenoit/EvolubotAnalysis}}.
 
-The analysis of the data was performed with the R language. Sources
-can, again, be found on
-Github\footnote{\url{https://github.com/uuuuu/nnnnn}}.%\footnote{\url{https://github.com/CBenoit/EvolubotAnalysis}}.
-
-We want to evaluate several techniques that are the following:
+The four variants investigated in this study are as follows
 \begin{itemize}
-    \item \emph{Vanilla NEAT}. The default NEAT, as described in
-      Sub-Section~\ref{subsec:neat}. One generation is evaluated with
-      one game where every unit is an individual with its own neural
-      network. Therefore, the fitness is individual on a per unit
-      basis.
-    \item \emph{Cascade-NEAT}. The cascade-NEAT variant, as described
-      in Sub-Section~\ref{subsec:cascade-neat}.  The evaluation mothed
-      is the same as for vanilla NEAT above.
-    \item \emph{Novelty Search with vanilla NEAT}. The novelty search
-      method as described in Sub-Section~\ref{subsec:novelty-search}
-      applied to the NEAT algorithm.  The evaluation methed is the
-      same as for vanilla NEAT above.
-    \item \emph{``Unified'' networks with vanilla NEAT}. For this one,
-      as opposed to the evaluation method explained above, only one
-      indivual is evaluated per game and thus to evaluate a whole
-      generation, a number of games equal to the population size must
-      be processed.  The fitness of an indivual is computed by how
-      well all the controlled units performs. Each unit still has its
-      own neural network but, they're all obtained by using the genome
-      of the individual being evualated.
+    \item \emph{Vanilla}. The default NEAT, as described in
+      section~\ref{subsec:neat}. Each generation is evaluated using one
+      game, where each unit uses the network of a different individual
+      in the Population. The fitness of each individual is based on
+      the performance of that particular unit.
+    \item \emph{Cascade-NEAT}. The cascade-NEAT variant, described in
+      section~\ref{subsec:cascade-neat}. The evaluation procedure is
+      the same as for Vanilla NEAT.
+    \item \emph{Novelty Search with vanilla NEAT}. Here we use a
+      different fitness function (described below) following the
+      novelty search method described in
+      section~\ref{subsec:novelty-search}. The evaluation procedure is
+      the same as for Vanilla NEAT above.
+    \item \emph{``Unified'' networks with vanilla NEAT}. In this
+      variant, we modify the evaluation procedure. Only one individual
+      is evaluated per game and, on each game, the entire squad has
+      the same neural network. The fitness is calculated based on the
+      performance of all individuals. For the sake of fairness, the
+      number of generations is reduced proportionally in comparison
+      with the above three variants.
 \end{itemize}
 
-We consider that in an actual game, being able to preserve one's units
-can be as important as being able to defeat the enemy units.
-Therefore, in this study we will measure survival rates as well.
 
 \subsection{Neural Networks Inputs and Outputs}
 
-For all the matchups, we will generate networks with at least the
-following inputs:
+The Neural Network used in our experimental framework has the
+following inputs and outputs.
+
+Inputs:
 \begin{itemize}
-    \item The \emph{cooldown} of the ground weapon.
-    \item The \emph{distance} to the \emph{closest enemy}.
-    \item The \emph{number} of enemies \emph{in sight}.
-    \item The \emph{distance} to the \emph{closest allies}.
-    \item The \emph{number} of allies \emph{in sight}.
+    \item The cooldown of the ground weapon.
+    \item The distance to the closest enemy;
+    \item The number of enemies in sight;
+    \item The distance to the closest allies;
+    \item The numberof allies in sight;
+    \item (Marines only) Whether the Unit has \emph{Stimpack} active or not.
 \end{itemize}
 
-And the following outputs:
+Outputs:
 \begin{itemize}
-    \item \emph{Attack} the \emph{weakest enemy in fire range}.
-    \item \emph{Retreat} from the battlefield: \emph{draw away from enemies in sight}.
-    \item \emph{Spread out}: \emph{draw away from allies in sight}.
-    \item \emph{Gathering}: get close to \emph{allies in sight}.
+    \item {\bf Attack}: Attacks the weakest enemy in sight;
+    \item {\bf Retreat}: Move away from enemies in sight;
+    \item {\bf Spread out}: Move away from allies in sight;
+    \item {\bf Gather}: Mote towards allies in sight;
+    \item {\bf Use Stimpack}: For marines only.
 \end{itemize}
 
-The \emph{attack} action consist of going in the direction of the closest enemy not in fog of war
-and if there are severeral enemies in fire range, attack the weakest one.
+The \emph{attack} action orders the unit to attack the weakest enemy
+(not in fog of war). If there are no enemies in sight, the unit does
+nothing.
 
-As for \emph{retreat, spread out and gathering} actions, a weighted vector is computed
-to lead the agent in a sensible way. This has been used by~\cite{Shantia11ConnectionistSC, Wender12ReinforcementMicroSC, Zhen13NeuroEvoSC} as well.
-Our version differ slightly though. For retreat and spread out, it means for the agent to
-get away from other units (enemies and allies) as fast as possible. The repulsive force's strength of an unit to
-get away from is calculated by its proximity with the agent so that the more the unit is close,
-the more urgent it is to get away from it specifically. For the retreat action, ally units
-get a significantly smaller weight than enemy's ones so that the agent avoid collision with
-allies while drawing away from enemies.
-In case of the gathering action, attractive force is given to allies only.
+The \emph{retreat}, \emph{spread out} and \emph{gather} actions
+calculate a weighted vector to decide the position that the unit is
+ordered to move to. This vector is calculated based on the method used
+by~\cite{Shantia11ConnectionistSC, Wender12ReinforcementMicroSC,
+  Zhen13NeuroEvoSC}.
 
-In addition, marines get one additional input and output:
-\emph{whether it is stimmed or not} as the input and \emph{use a
-  stimpack} as the output.
+Our version differ slightly though. The weight of each unit to the
+vector is proportional to their distance to the agent. In the case of
+\emph{Retreat}, ally units get a significantly smaller weight than
+enemy units, so that the agent avoid collision with allies while
+moving away from enemies. For \emph{Spread Out}, only allies are
+weighted. For \emph{Gather}, only allies are weighted and they have
+negative weight.
 
 \subsection{Fitness Specification}
 
-The weights are used to model the fitness function. There are two
-fitness functions, according to whether the Unified NEAT variant is
-being used or not.  The regular fitness function is given by
-\begin{equation*}
-  (\text{damages\_dealt} \times A + \text{health} \times B + \text{survivors} \times C)^D,
-\end{equation*}
-while the fitness for the Unified NEAT variant is
-\begin{equation*}
-  (\text{damages\_dealt} \times A + \text{survivors} \times C)^D.
-\end{equation*}
-Here \emph{A} is the attack performance weight, \emph{B} the survival
-performance weight, C is the cooperative performance weight and D is
-the exponent on the fitness.
+In this study we consider that, during an actual game, the ability
+to preserve's one's units is as important as the ability to defeat
+enemy units. Therefore, we formulate a fitness function that
+measures survival rates as well as victory rates.
 
-To encourage the variants to find strategies that promote cooperation
-and survival, we have included the number of survivors as a component
-of the fitness function.
+For the Vanilla and Cascade variants, the fitness function is
+given by:
+\begin{equation}\label{eq:fitness_unit}
+  (\text{damage\_dealt} \times A + \text{health} \times B +
+  \text{survivors} \times C)^D,
+\end{equation}
+Where \emph{damage\_dealt} is the amount of damage caused to all
+enemies, \emph{health} is the total remaining health of the unit, and
+\emph{survivors} is the total remaining ally units, to promote
+cooperation. $A, B, C,$ and $D$ are weight parameters (discussed in
+the next section).
 
-Novelty currently just use fitness as novelty metrics which is not
-the best use case at all for this method.
+For the Unified variant, the fitness function is given by:
+\begin{equation}\label{eq:fitness_group}
+  (\text{damage\_dealt} \times A + \text{survivors} \times C)^D.
+\end{equation}
+Where the components are the same as in the previous equation.
 
+Finally, for the Novelty variant, we use the difference in fitness as
+the novelty metric. Better alternative choices of Novelty metric are
+discussed in section~\ref{section:conclusion}
+
+{\bf TODO BENOIT: Add discussion of better novelty metrics on conclusion}
