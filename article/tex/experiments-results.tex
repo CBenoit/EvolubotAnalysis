@@ -107,37 +107,44 @@ results of the experiment by studying the different behaviors that emerged.
 
 \subsubsection{Developping stimpack behaviour}
 
-% TODO: add an image?
+\begin{figure}
+    \includegraphics[width=.5\textwidth]{figures/marines_vs_zerglings_combat}
+    \caption{Marines fighting against zerglings {\bf FIXME: really interesting to show?}}\label{fig:marines_vs_zerglings}
+\end{figure}
 
-Vanilla NEAT doesn’t seems to be good a developing the stimpack behaviour since organisms
+Standard NEAT doesn’t seems to be good a developing the stimpack behaviour since organisms
 that survives without stimpack get better reward,
 even though they may have survived because others used stimpacks to get in the frontline
 and got themselves killed first.
 So, organisms tends to lose this behaviour over generations.
-
-CHECK: Cascade-NEAT and Novelty [expected to be approximately identical].
+Cascade-NEAT did similar to standard NEAT.
 
 In comparison, the unified version, which is good a developing uniform behaviours
 was somewhat better at developing this behaviour.
-Indeed, since every agents use the same type of neural network, all units in the round
-has the behaviour encoded and don’t win because others
-did all the hard stuff.
+Indeed, since every agents use the same genotype, all units in the round
+has the behaviour encoded and didn't win because agents based on a different genome
+went on the frontline first and got a bad fitness doing so.
 
-Sadly the marines vs marines problem can be solved efficiently just by waiting for the
-enemy and attacking all out mostly without stimpacks.
+Finally, with novelty search, the behaviour is lost less easily and some of the best genomes still use it.
+But it's not efficient enough to win easily especially during evolution where some other units
+simply flee. It might however explains the sligthly better results saw with the statistical approach.
+
+For each technique, the major reason why the stimpack behaviour is lost is because the fighting behaviour along
+the stimpack behaviour is sometimes poor. They try to flee without reason or just don't attack even when the
+stimpacks was activated at an appropriate moment.
+So it seems possible to get a good stimpack behaviour especially with novelty and a better novelty measurement
+that doesn't use the fitness which doesn't reflect the quality of the stimpack behaviour directly.
+
+The marines vs marines problem is solved efficiently just by waiting for the
+enemy and attacking all out mostly without stimpacks and it's precisely the convergent behaviour.
 Depending on the enemy’s formation at it’s arrival it can be even more effective.
 They can indeed shoot first with more firepower.
-
-Novelty search got a significantly better result on the marines vs zergs experiments,
-meaning it was able to develop some stimpack behaviours. [need more behaviour analysis]
-
-Conclusion: not a big success. Overall failure.
 
 \subsubsection{Kiting behaviour}
 
 \begin{figure}
     \includegraphics[width=.5\textwidth]{figures/vultures_kiting_screenshot}
-    \caption{Vultures using kiting technique to beat xealots}\label{fig:vultures_kiting}
+    \caption{Vultures using kiting technique to beat zealots}\label{fig:vultures_kiting}
 \end{figure}
 
 All the presented method performs exceedingly well on the kiting problem (that is vultures vs zealots).
@@ -159,5 +166,27 @@ To improve: friendly collisions blocking effective retreat.
 
 \subsubsection{Spreading out behaviour}\label{subsec:spreading}
 
-Vultures spread out to cover large space and converge to the enemy. More details? Reasons?
+\begin{figure}
+    \includegraphics[width=.15\textwidth]{figures/spreading_behaviour_standard_neat}
+    \includegraphics[width=.15\textwidth]{figures/spreading_behaviour_unified}
+    \caption{Spreading out behaviour with standard NEAT (left) and unified version (right)}\label{fig:spreading-behaviour}
+\end{figure}
+
+With the vultures, another interesting behaviour was the vultures spreading out to cover large space
+(as showed on Figure~\ref{fig:spreading-behaviour}
+and then converge back to the enemy once it's spotted. However, this behaviour tends to disappear as
+well probably because oftenly the fitness is not as good for such individuals for various reasons.
+It may be because spreading out and converging back takes time and lead to less damages inflicted
+or because some individuals had the spreading behaviour without attacking afterward, especially
+for the unified version where the behaviour is often lost very quickly because in such case not
+even a single unit try to attack.
+Moreover, we didn't saw the behaviour at all with Cascade-NEAT, but it may be due to randomness.
+
+\begin{figure}
+    \includegraphics[width=.15\textwidth]{figures/spreading_behaviour_novelty}
+    \caption{Spreading out behaviour with Novelty}\label{fig:spreading-behaviour-novelty}
+\end{figure}
+
+That being said, novelty search found a very efficient spreading behaviour leading to a complete
+encirclement of the oponent as show by Figure~\ref{fig:spreading-behaviour-novelty}.
 
