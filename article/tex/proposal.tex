@@ -22,12 +22,12 @@ The four variants investigated in this study are as follows
       game, where each unit uses the network of a different individual
       in the Population. The fitness of each individual is based on
       the performance of that particular unit.
-    \item \emph{Cascade-NEAT}. The cascade-NEAT variant, described in
+    \item \emph{Cascade-NEAT}. The Cascade-NEAT variant, described in
       section~\ref{subsec:cascade-neat}. The evaluation procedure is
       the same as for Vanilla NEAT.
     \item \emph{Novelty Search with vanilla NEAT}. Here we use a
       different fitness function (described below) following the
-      novelty search method described in
+      Novelty Search method described in
       section~\ref{subsec:novelty-search}. The evaluation procedure is
       the same as for Vanilla NEAT above.
     \item \emph{``Unified'' networks with vanilla NEAT}. In this
@@ -65,8 +65,8 @@ Outputs:
 \end{itemize}
 
 The \emph{attack} action orders the unit to attack the weakest enemy
-(not in fog of war). If there are no enemies in sight, the unit does
-nothing.
+at fire range. If there are no enemies in fire range sight, the
+unit move towards the closest visible enemy. Otherwise, it does nothing.
 
 The \emph{retreat}, \emph{spread out} and \emph{gather} actions
 calculate a weighted vector to decide the position that the unit is
@@ -108,5 +108,5 @@ For the Unified variant, the fitness function is given by:
 Where the components are the same as in the previous equation.
 
 Finally, for the Novelty variant, we use the difference in fitness as
-the novelty metric. Better alternative choices of Novelty metric are
+the Novelty metric. Better alternative choices of Novelty metric are
 discussed in section~\ref{section:conclusion}

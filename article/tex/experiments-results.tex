@@ -69,7 +69,7 @@ for each variation/matching pairing.
   \includegraphics[width=.4\textwidth]{figures/evolution_zealot}
   \includegraphics[width=.4\textwidth]{figures/evolution_unified}
   \caption{Training progress for two vulture vs zealot matchups. Left:
-    Cascade NEAT vs zealots. Right: Unified NEAT. Note that the
+    Cascade-NEAT vs zealots. Right: Unified NEAT. Note that the
     fitness function are different so absolute values should not be
     compared directly.}\label{fig:evolution}
 \end{figure*}
@@ -78,12 +78,12 @@ Finally, we observed the training progress of the
 experiment. Figure~\ref{fig:evolution} show two examples of training
 graphs that are representative of the experiment as a
 whole\footnote{the figures for all matchings can be found at the
-online repository}. In the Cascade NEAT training (left side) we see
+online repository}. In the Cascade-NEAT training (left side) we see
 that while there is a small increase in best and mean fitness, there
 are large variations every generation. In the Unified NEAT training
 (right side) these variations are not present. In unified neat, all
 networks in the same combat experiment share the same fitness result,
-while in the other variants (such as the Cascade Neat) each network in
+while in the other variants (such as the Cascade-NEAT) each network in
 the same combat is evaluated separately, even though they influence
 each other (a weak network will make the overall combat harder for a
 stronger network).
@@ -103,60 +103,60 @@ marine/zergling matchup.
 
 To better understand this lack of difference, and what could be done
 to increase the survival ratio, we performed a qualitative analysis of the
-results of the experiment by studying the different behaviors that emerged.
+results of the experiment by studying the different behaviours that emerged.
 
 \subsubsection{Developping stimpack behaviour}
 
 \begin{figure}
     \includegraphics[width=.45\textwidth]{figures/marines_vs_zerglings_combat}
-    \caption{Marines/Zerglings Matchup. The Zergling speed makes this
+    \caption{Marines/Zerglings matchup. The Zergling speed makes this
       a hard matchup to win without stimpack
-      behavior}\label{fig:marines_vs_zerglings}
+      behaviour}\label{fig:marines_vs_zerglings}
 \end{figure}
 
 The Marine/Zergling matchup was the hardest one of the four studied,
 and the one where none of the NEAT variants managed to consistently
 find a good solution. This is because the high speed of the zerglings
-prevent the marines from develop a kiting behavior
+prevent the marines from develop a kiting behaviour
 (Figure~\ref{fig:marines_vs_zerglings}).
 
 To solve this problem, an agent needs to develop a \emph{stimpack
-  behavior}. Stimpack is an ability that increases the speed of the
+  behaviour}. Stimpack is an ability that increases the speed of the
 marine for a few seconds, in exchange of an amount of its health. 
 
-Vanilla NEAT and Cascade NEAT didn't do a good job at developing this
-stimpack behavior. What we observed is that in a population where some
+Vanilla NEAT and Cascade-NEAT didn't do a good job at developing this
+stimpack behaviour. What we observed is that in a population where some
 individuals use stimpack and some don't, the individuals that do not
 use stimpack get better reward (because of their health), even though
 their survival is because of the 'sacrifice' of the stimpack using
 individuals, who rushed to the frontline and got themselves killed
-first. The final result is that the stimpack behavior gets lost over
+first. The final result is that the stimpack behaviour gets lost over
 the generations.
 
 In comparison, the Unified Variant was somewhat better at developing
-the stimpack behavior. Since all agents in one combat use the same
+the stimpack behaviour. Since all agents in one combat use the same
 genotype and have the same genotype, all of them are rewarded equally
 for the use of stimpack, even if some units are lost early.
 
-As for the Novelty Variant, the behavior is lost less easily, and some
+As for the Novelty Variant, the behaviour is lost less easily, and some
 of the best genomes still use it. However, there is still a degree
 of loss during the evolution, specially when some units in combat develop
-a fleeing behavior. However, the novelty aspect might be just enough to
+a fleeing behaviour. However, the Novelty aspect might be just enough to
 keep the less rewarded stimpack users in the gene pool, and help explain the
-better result of novelty search noticed in the previous section.
+better result of Novelty search noticed in the previous section.
 
-Overall, another reason for losing the stimpack behavior is the timing
-of its development during the training. If the fighting behavior is
+Overall, another reason for losing the stimpack behaviour is the timing
+of its development during the training. If the fighting behaviour is
 poor (for instance, not attacking the enemy or fleeing without
 reason), stimpack usage will exarcebate the problem. We imagine that
-it might be possible to develop a good stimpack behavior with a better
-novelty measurement that does not use the fitness and more
-appropriately model the novelty of combat behaviors.
+it might be possible to develop a good stimpack behaviour with a better
+Novelty measurement that does not use the fitness and more
+appropriately model the Novelty of combat behaviours.
 
 Additionaly, the marines vs marines matchup is solved differently from
 the zergling matchup. We observed that in most cases this matchup can
 be won by just waiting for the enemy and attacking all at once without
-stimpack, which was precisely the convergent behavior. This happens
+stimpack, which was precisely the convergent behaviour. This happens
 because the initial enemy formation may lead to a line to form during
 their advance, meaning that if the squad holds its original position
 it can pick the enemy forces a part at a time, shooting first with
@@ -173,9 +173,8 @@ more firepower.
 All the studied variants performed exceedingly well on the
 vulture/zealot matchup, as described in
 section~\ref{subsec:quantitative}. This matchup illustrates the
-\emph{kiting behavior}, where a faster, long ranged unit has to keep a
+\emph{kiting behaviour}, where a faster, long ranged unit has to keep a
 distance from a short ranged opponent.
-
 
 After a short number of generations, adequate individuals start to
 emerge, even with the first species, meaning the topology required
@@ -205,12 +204,12 @@ that they could shine against an identical opponent.
     \caption{Spread out behaviour with standard NEAT (left) and Unified Variant (right)}\label{fig:spreading-behaviour}
 \end{figure}
 
-In the vulture match ups, another interesting behaviour was the
+In the vulture matchups, another interesting behaviour was the
 vultures spreading out to cover a large area (see
 Figure~\ref{fig:spreading-behaviour}) and then converge back to the
 enemy once it's spotted.
 
-However, this behaviour tends to disappear like the stimpack behavior,
+However, this behaviour tends to disappear like the stimpack behaviour,
 probably because the fitness of these individuals is not as good for
 various reasons.  It may be because spreading out and converging back
 takes time and lead to less damages inflicted or because some
@@ -225,7 +224,7 @@ may be due to randomness.
     \caption{Spread out behaviour with the Novelty Variant}\label{fig:spreading-behaviour-novelty}
 \end{figure}
 
-That being said, novelty search found a very efficient spreading
+That being said, Novelty search found a very efficient spreading
 behaviour leading to a complete encirclement of the oponent as show in
 Figure~\ref{fig:spreading-behaviour-novelty}.
 

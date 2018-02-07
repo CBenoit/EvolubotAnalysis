@@ -1,20 +1,20 @@
 \section{Conclusion}\label{section:conclusion}
 
 This paper presented a comparison between several variants related to
-NEAT: \emph{standard NEAT, cascade-NEAT and NEAT with novelty search}
+NEAT: \emph{standard NEAT, Cascade-NEAT and NEAT with Novelty search}
 where the whole population is evaluated at once in one game as well as
 \emph{``unified'' NEAT} where in one game only one individual whose
 neural network is used for every unit is evaluated instead of
 evaluating all the population.  To do so, an open source C++ library
 for NEAT and a Starcraft Bot using it was developed.  The default AI
 was used to measure performance of the Bot by playing against it.
-Four match ups were considered: marines vs marines, marines vs
+Four matchups were considered: marines vs marines, marines vs
 zerglings, vultures vs vultures and vultures vs zealots.
 
 While no statistically significant difference in their winning and
 survival rates was found, the specific behaviours achieved by each
 variant could differs quite a bit as seen on
-Subsection~\ref{subsec:qualitative}. Novelty search was able to keep
+Subsection~\ref{subsec:qualitative}. Novelty Search was able to keep
 longer the stimpack behaviour and did great at encircling the oponent
 with the spread out behaviour.  Cascade-NEAT didn't develop the spread
 out behaviour at all in our observations.  Unified Variant developed a
@@ -26,11 +26,11 @@ may be due to the low granularity of the inputs and outputs of the
 neural networks.
 
 As explained in subsection~\ref{subsec:fitness-specification} the
-novelty metric is given by the fitness of the individual which is not
-ideal. A better novelty measurement would directly reflect the
+Novelty metric is given by the fitness of the individual which is not
+ideal. A better Novelty measurement would directly reflect the
 behaviour of the units such the way the agent move or the way it
 performs kiting. Whereas the fitness function can only reflect the
-behaviour indirectly. Finding a good novelty measurement can be a very
+behaviour indirectly. Finding a good Novelty measurement can be a very
 difficult problem depending on the application, and Starcraft is one
 of them.
 

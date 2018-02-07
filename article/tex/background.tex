@@ -1,4 +1,3 @@
-
 \section{Background}\label{section:background}
 
 \subsection{Starcraft}
@@ -91,13 +90,13 @@ NEAT and rtNEAT~\cite{Zhen13NeuroEvoSC} for training a micro controller (also
 using ``Attack'' and ``Retreat''). Their setup includes four classes
 of engagement (ranged vs melee, melee vs melee, ranged vs ranged and
 melee vs ranged), each with two teams of 12 units. They remark how the
-unit composition of the match up has an effect on the variability of
+unit composition of the matchup has an effect on the variability of
 the result.
 
 One thing that all of these approaches (and a few others) have in
 common is that the evaluation of the training is based on the win
 ratio and the number of enemies killed. In this study, we want to
-explore how to achieve a more ``humane'' behavior, i.e. achieving
+explore how to achieve a more ``humane'' behaviour, i.e. achieving
 victories while at the same time conserving the fighting force and
 maximizing the number of surviving units.
 
@@ -120,10 +119,10 @@ originally demonstrated on the combat game NERO. Since then, NEAT and
 rtNEAT have been popular choices for the training of controllers in
 tactical scenarios. The ability to match each unit to a separate
 network in the population, and the ability to progressively learn more
-complex behaviors are two compelling reasons for the use of
+complex behaviours are two compelling reasons for the use of
 NEAT/rtNEAT in Starcraft.
 
-Accordingly, recently variants of NEAT such as CascadeNEAT have also
+Accordingly, recently variants of NEAT such as Cascade-NEAT have also
 been proposed to answer to specific problems.
 
 \subsection{Cascade-NEAT}\label{subsec:cascade-neat}
@@ -141,13 +140,13 @@ and the keepaway soccer decision problem. However, Cascade-NEAT
 performs very poorly on some problems requiring recurrent connectivity
 patterns, since it cannot produce such patterns. An example of such
 failure is the non-Markovian double pole-balancing problem for which
-cascade-NEAT doesn't find a single suitable solution whereas the
+Cascade-NEAT doesn't find a single suitable solution whereas the
 standard NEAT performs very well.
 
 To our knowledge, Cascade-NEAT has not been applied to the Starcraft
 problem. Because of the similarity of some strategic decisions
 involved in Starcraft micro management and the keepaway soccer problem
-we decided to include Cascade-NEAt as one of the alternatives for the
+we decided to include Cascade-NEAT as one of the alternatives for the
 current investigation.
 
 \subsection{Novelty search}\label{subsec:novelty-search}
@@ -167,7 +166,7 @@ fail.
 
 \citet{Lehman11Novelty} demonstrated this with an experiment where a
 robot controlled by a neural network has to find a specific location
-in a maze. A solution's novelty is characterized by the end location
+in a maze. A solution's Novelty is characterized by the end location
 of the robot, compared to all others so far. Only Novelty Search was
 able to find the goal in the deceptive maze.
 
@@ -188,3 +187,4 @@ explored as well \cite{Hagelback08RTSPotentialFields}.
 \citet{Svendsen12SCPotentialFieldsGP} applied this method to
 StarCraft micromanagement along with a multi-objective evolutionary
 algorithm called NSGA-II to optimize the fields automatically.
+
